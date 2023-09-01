@@ -1,22 +1,18 @@
 
-// #include <ctype.h>
-// #include <math.h>
-// #include <stdarg.h>
-// #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "calc.h"
 
 int main() {
-  char *input_str = calloc(255, sizeof(char));
-  char *lex_num = calloc(255, sizeof(char));
-  char *stek = calloc(255, sizeof(char));
-  char *output_str = calloc(255, sizeof(char));
+  create_stack stack = {0};
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *lex_num = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *stek = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *output_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   // переделываем выражение из  классического в обратную польскую нотацию
   // scanf("%s", input_str);
   strcpy(input_str, "5465+6344");
   int lex_num_index = 0;
   int stek_index = 0;
+  int num = 0;
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     // операнды
     if (input_str[i] >= '0' && input_str[i] <= '9') {
@@ -28,8 +24,10 @@ int main() {
         lex_num[lex_num_index] = input_str[i];
         lex_num_index++;
       }
-      strcat(output_str, lex_num);
-      output_str[strlen(output_str)] = ' ';
+      num = atoi(lex_num);
+      stack.data[stack.size] = num;
+      stack.size++;
+      num = 0;
       memset(lex_num, '0', strlen(lex_num));
       lex_num_index = 0;
       // операции
@@ -40,8 +38,8 @@ int main() {
   }
   printf("final output: %s\n", output_str);
   printf("final lex_num: %s\n", lex_num);
-  printf("final stek: %s", stek);
-
+  printf("final stek: %s\n", stek);
+  printStack(stack);
   free(input_str);
   free(lex_num);
   free(stek);
