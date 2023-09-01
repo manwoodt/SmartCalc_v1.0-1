@@ -30,10 +30,11 @@ int peek(const create_stack *stack) {
 void printStack(create_stack stack) {
   printf("stack size: %ld\n", stack.size);
   for (long unsigned int i = 0; i < stack.size; i++) {
-    if (stack.char_or_not)
+    if (stack.char_or_not) {
       printf("%c | ", stack.data[i]);
-    else
+      printf("%i | ", stack.priority[i]);
+    } else
       printf("%d | ", stack.data[i]);
   }
-  printf("\n");
+  printf("\n\n");
 }

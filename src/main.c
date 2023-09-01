@@ -34,6 +34,7 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
       // операции
     } else if (input_str[i] >= '(' && input_str[i] <= '/') {
       push(stack, input_str[i]);
+      priority(stack);
     }
   }
 }
@@ -54,4 +55,33 @@ void parser_operand(char *input_str, create_stack *output_str,
   output_str->size++;
   memset(lex_num, '0', strlen(lex_num));
   free(lex_num);
+}
+
+void priority(create_stack *stack) {
+  switch (stack->data[stack->size - 1]) {
+    case '+':
+      stack->priority[stack->size - 1] = 1;
+      break;
+    case '-':
+      stack->priority[stack->size - 1] = 1;
+      break;
+    case '*':
+      stack->priority[stack->size - 1] = 2;
+      break;
+    case '/':
+      stack->priority[stack->size - 1] = 2;
+      break;
+    case '^':
+      stack->priority[stack->size - 1] = 3;
+      break;
+    case '(':
+      stack->priority[stack->size - 1] = 4;
+      break;
+    case ')':
+      stack->priority[stack->size - 1] = 5;
+      break;
+    default:
+      stack->priority[stack->size - 1] = 0;
+      break;
+  }
 }
