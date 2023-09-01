@@ -18,8 +18,12 @@ typedef struct {
   int data[255];
   // size – это количество элементов, и вместе с тем указатель на вершину стека.
   size_t size;
+  int char_or_not;
 } create_stack;
 
-void printStack(const create_stack stack);
+void printStack(create_stack stack);
+void push(create_stack *stack, int value);
+int pop(create_stack *stack);
+int peek(const create_stack *stack);
 
 #endif /*S21_STRING_H*/
