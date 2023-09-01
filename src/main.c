@@ -10,25 +10,35 @@
 int main() {
   char *input_str = calloc(255, sizeof(char));
   char *lex_num = calloc(255, sizeof(char));
-  char *lex_oper = calloc(255, sizeof(char));
-  // char *output_str = calloc(255, sizeof(char));
-  // переделываем выражение из  классического в польскую нотацию
-  scanf("%s", input_str);
+  char *stek = calloc(255, sizeof(char));
+  char *output_str = calloc(255, sizeof(char));
+  // переделываем выражение из  классического в обратную польскую нотацию
+  // scanf("%s", input_str);
+  strcpy(input_str, "5+6");
+  int lex_num_index = 0;
+  int stek_index = 0;
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     if (input_str[i] >= '0' && input_str[i] <= '9') {
-      lex_num[i] = input_str[i];
+      lex_num[lex_num_index] = input_str[i];
+      lex_num_index++;
+      // смотрим следующее символ - цифра, если да, добавляем в массив числа
+      while (input_str[i + 1] >= '0' && input_str[i + 1] <= '9') {
+        i++;
+        lex_num_index++;
+        lex_num[i] = input_str[i];
+      }
     } else if (input_str[i] >= '(' && input_str[i] <= '/') {
-      lex_oper[i] = input_str[i];
+      stek[stek_index] = input_str[i];
+      stek_index++;
     }
   }
-  // printf("%s", input_str);
-  printf("%s", lex_num);
-  printf("%s", lex_oper);
-  // переделываем выражение из польской нотации в обратную польскую нотацию
+  printf("%s", output_str);
+  printf("final lex_num: %s\n", lex_num);
+  printf("final stek: %s", stek);
 
   free(input_str);
   free(lex_num);
-  free(lex_oper);
+  free(stek);
 
   return 0;
 }
