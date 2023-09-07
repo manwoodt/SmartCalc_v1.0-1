@@ -28,12 +28,24 @@ int peek(const create_stack *stack) {
   return stack->data[stack->size - 1];
 }
 
+void nulldata(create_stack *stack) {
+  if (stack->size == 0) {
+    printf("STACK_UNDERFLOW");
+    exit(STACK_UNDERFLOW);
+  }
+  stack->size--;
+  stack->data[stack->size] = 0;
+  stack->priority[stack->size] = 0;
+}
+
 void printStack(create_stack stack) {
   printf("stack size: %ld\n", stack.size);
   for (long unsigned int i = 0; i < stack.size; i++) {
     if (stack.char_or_not) {
       printf("%c | ", stack.data[i]);
       printf("%i | ", stack.priority[i]);
+    } else if (stack.data[i] >= '(' && stack.data[i] <= '/') {
+      printf("%c | ", stack.data[i]);
     } else
       printf("%d | ", stack.data[i]);
   }

@@ -27,5 +27,6 @@ void push(create_stack *stack, int value);
 int pop(create_stack *stack);
 int peek(const create_stack *stack);
 void priority(create_stack *stack);
+void nulldata(create_stack *stack);
 
 #endif /*S21_STRING_H*/

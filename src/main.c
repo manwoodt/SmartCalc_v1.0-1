@@ -12,7 +12,7 @@ int main() {
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
   // scanf("%s", input_str);
-  strcpy(input_str, "5465+6344*34534/3-45");
+  strcpy(input_str, "5465*(6344+3)");
 
   parser(input_str, &output_str, &stack);
 
@@ -47,28 +47,45 @@ int main() {
 */
 
 void parser(char *input_str, create_stack *output_str, create_stack *stack) {
+  int diff_priority = 0;
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     // операнды
     if (input_str[i] >= '0' && input_str[i] <= '9') {
       parser_operand(input_str, output_str, &i);
       // операции
+
     } else if (input_str[i] >= '(' && input_str[i] <= '/') {
-      if (stack->size == 0) {
+      if (stack->size == 0 || input_str[i] == '(') {
         stack->priority[stack->size] = priority2(input_str[i]);
         push(stack, input_str[i]);
       } else {
-        if (priority2(input_str[i]) > stack->priority[stack->size - 1]) {
+        // больше 0 = текущее число имеет больший приоритет чем последнее число
+        // в стеке
+        diff_priority =
+            priority2(input_str[i]) - stack->priority[stack->size - 1];
+        if (diff_priority > 0) {
           stack->priority[stack->size] = priority2(input_str[i]);
           push(stack, input_str[i]);
-        } else if (priority2(input_str[i]) <=
-                   stack->priority[stack->size - 1]) {
-          while (priority2(input_str[i]) <= stack->priority[stack->size - 1]) {
+        }
+
+        else if (diff_priority <= 0) {
+          while (diff_priority <= 0) {
             if (stack->size == 0) break;
-            output_str->data[output_str->size] = pop(stack);
-            output_str->size++;
+            if (peek(stack) != '(') {
+              output_str->data[output_str->size] = pop(stack);
+              output_str->size++;
+            } else {
+              nulldata(stack);
+              break;
+            }
           }
-          stack->priority[stack->size] = priority2(input_str[i]);
-          push(stack, input_str[i]);
+          // текущая операция, которая не вошла в стек
+          if (input_str[i] != ')') {
+            stack->priority[stack->size] = priority2(input_str[i]);
+            push(stack, input_str[i]);
+          } else {
+            nulldata(stack);
+          }
         }
       }
     }
