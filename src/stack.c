@@ -13,6 +13,7 @@ void push(create_stack *stack, int value) {
 // взять число из стека
 int pop(create_stack *stack) {
   if (stack->size == 0) {
+    printf("STACK_UNDERFLOW");
     exit(STACK_UNDERFLOW);
   }
   stack->size--;
