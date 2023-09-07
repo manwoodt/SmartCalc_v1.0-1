@@ -26,7 +26,11 @@ void printStack(create_stack stack);
 void push(create_stack *stack, int value);
 int pop(create_stack *stack);
 int peek(const create_stack *stack);
-void priority(create_stack *stack);
 void nulldata(create_stack *stack);
+int priority(int operation);
+int isoperation(int operation);
 
+void parser(char *input_str, create_stack *output_str, create_stack *stack);
+void parser_operand(char *input_str, create_stack *output_str,
+                    long unsigned int *i);
 #endif /*S21_STRING_H*/
