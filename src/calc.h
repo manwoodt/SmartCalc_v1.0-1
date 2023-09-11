@@ -33,4 +33,6 @@ int isoperation(int operation);
 void parser(char *input_str, create_stack *output_str, create_stack *stack);
 void parser_operand(char *input_str, create_stack *output_str,
                     long unsigned int *i);
+void parser_operation(char *input_str, create_stack *stack,
+                      create_stack *output_str, long unsigned int i);
 #endif /*S21_STRING_H*/

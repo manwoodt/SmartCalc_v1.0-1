@@ -43,7 +43,6 @@ int main() {
 */
 
 void parser(char *input_str, create_stack *output_str, create_stack *stack) {
-  int diff_priority = 0;
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     if (input_str[i] == '(') {
       push(stack, input_str[i]);
@@ -60,36 +59,42 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
       parser_operand(input_str, output_str, &i);
       // операции
     } else if (isoperation(input_str[i])) {
-      if (stack->size == 0) {
-        push(stack, input_str[i]);
-      } else {
-        // больше 0 = текущее число имеет больший приоритет чем последнее
-        // число в стеке
-        diff_priority =
-            priority(input_str[i]) - stack->priority[stack->size - 1];
-
-        if (diff_priority > 0) {
-          push(stack, input_str[i]);
-        }
-
-        else if (diff_priority <= 0) {
-          while (stack->size != 0 && peek(stack) != '(' && diff_priority <= 0) {
-            output_str->data[output_str->size] = pop(stack);
-            output_str->size++;
-            diff_priority =
-                priority(input_str[i]) - stack->priority[stack->size - 1];
-          }
-          // текущая операция, которая не вошла в стек
-          if (input_str[i] != ')') {
-            push(stack, input_str[i]);
-          }
-        }
-      }
+      parser_operation(input_str, stack, output_str, i);
     }
   }
+  // опустошение стека
   while (stack->size != 0) {
     output_str->data[output_str->size] = pop(stack);
     output_str->size++;
+  }
+}
+
+void parser_operation(char *input_str, create_stack *stack,
+                      create_stack *output_str, long unsigned int i) {
+  int diff_priority = 0;
+  if (stack->size == 0) {
+    push(stack, input_str[i]);
+  } else {
+    // больше 0 = текущее число имеет больший приоритет чем последнее
+    // число в стеке
+    diff_priority = priority(input_str[i]) - stack->priority[stack->size - 1];
+
+    if (diff_priority > 0) {
+      push(stack, input_str[i]);
+    }
+
+    else if (diff_priority <= 0) {
+      while (stack->size != 0 && peek(stack) != '(' && diff_priority <= 0) {
+        output_str->data[output_str->size] = pop(stack);
+        output_str->size++;
+        diff_priority =
+            priority(input_str[i]) - stack->priority[stack->size - 1];
+      }
+      // текущая операция, которая не вошла в стек
+      if (input_str[i] != ')') {
+        push(stack, input_str[i]);
+      }
+    }
   }
 }
 
