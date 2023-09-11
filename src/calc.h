@@ -16,6 +16,7 @@
 
 typedef struct {
   int data[STACK_MAX_SIZE];
+
   // size – это количество элементов, и вместе с тем указатель на вершину стека.
   size_t size;
   int char_or_not;

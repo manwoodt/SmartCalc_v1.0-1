@@ -4,6 +4,7 @@ int main() {
   // создаем стек и выходную строку
   create_stack output_str = {0};
   create_stack stack = {0};
+  // create_stack stack_res = {0};
   stack.char_or_not = 1;
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
@@ -15,6 +16,7 @@ int main() {
     printStack(stack);
     printf("Output_str\n");
     printStack(output_str);
+
   } else
     printf("ERROR\n");
 
@@ -100,7 +102,36 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
     output_str->size++;
   }
 }
+/*
+int calculation(create_stack *output_str, create_stack *stack_res) {
+  for (long unsigned int i = 0; i < strlen(output_str); i++) {
+    // если число
+    if ((output_str->data[i] >= '0' && output_str->data[i] <= '9')) {
+      push(stack, input_str[i]);
+    }
 
+    if (input_str[i] == ')') {
+      while (peek(stack) != '(') {
+        output_str->data[output_str->size] = pop(stack);
+        output_str->size++;
+      }
+      nulldata(stack);
+    }
+    // операнды
+    if (input_str[i] >= '0' && input_str[i] <= '9') {
+      parser_operand(input_str, output_str, &i);
+      // операции
+    } else if (isoperation(input_str[i])) {
+      parser_operation(input_str, stack, output_str, i);
+    }
+  }
+  // опустошение стека
+  while (stack->size != 0) {
+    output_str->data[output_str->size] = pop(stack);
+    output_str->size++;
+  }
+}
+*/
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i) {
   int diff_priority = 0;
@@ -196,3 +227,4 @@ int garbage_for_validator(int operation) {
   else
     return 1;
 }
+// int is_number
