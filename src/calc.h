@@ -29,6 +29,8 @@ int peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
 int isoperation(int operation);
+int validator(char *input_str);
+int garbage_for_validator(int operation);
 
 void parser(char *input_str, create_stack *output_str, create_stack *stack);
 void parser_operand(char *input_str, create_stack *output_str,

@@ -9,13 +9,14 @@ int main() {
 
   // scanf("%s", input_str);
   strcpy(input_str, "(1*((2+3-4)/23))^2");
-
-  parser(input_str, &output_str, &stack);
-
-  printf("Stack\n");
-  printStack(stack);
-  printf("Output_str\n");
-  printStack(output_str);
+  if (validator(input_str)) {
+    parser(input_str, &output_str, &stack);
+    printf("Stack\n");
+    printStack(stack);
+    printf("Output_str\n");
+    printStack(output_str);
+  } else
+    printf("ERROR\n");
 
   free(input_str);
 
@@ -42,8 +43,39 @@ int main() {
 вывода.
 */
 
+int validator(char *input_str) {
+  int correct = 1;
+  int is_left_bracket = 0;
+  int is_right_bracket = 0;
+  int is_number = 0;
+  for (long unsigned int i = 0; i < strlen(input_str); i++) {
+    // 1 этап валидации (проверка на неправильные символы)
+    if (garbage_for_validator(input_str[i])) {
+      correct = 0;
+    }
+    // 2 этап валидации (проверка на закрытие/открытие скобок)
+    if ((input_str[i]) == '(') {
+      is_left_bracket++;
+    }
+    if ((input_str[i]) == ')') {
+      is_right_bracket++;
+    }
+    // пустые скобки
+    if (input_str[i] == '(' && input_str[i + 1] == ')') correct = 0;
+    if (is_right_bracket > is_left_bracket) correct = 0;
+    if (input_str[i] >= '0' && input_str[i] <= '9') is_number = 1;
+  }
+  // неравное количество скобок
+  if (is_left_bracket != is_right_bracket) correct = 0;
+
+  if (!is_number) correct = 0;
+  return correct;
+}
+
 void parser(char *input_str, create_stack *output_str, create_stack *stack) {
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
+    // while (input_str[i] == ' ') i++;
+
     if (input_str[i] == '(') {
       push(stack, input_str[i]);
     }
@@ -154,4 +186,13 @@ int isoperation(int operation) {
     return 1;
   else
     return 0;
+}
+
+int garbage_for_validator(int operation) {
+  if (operation == '+' || operation == '-' || operation == '*' ||
+      operation == '/' || operation == '^' || operation == '(' ||
+      operation == ')' || (operation >= '0' && operation <= '9'))
+    return 0;
+  else
+    return 1;
 }
