@@ -5,11 +5,11 @@ int main() {
   create_stack output_str = {0};
   create_stack stack = {0};
   // create_stack stack_res = {0};
-  stack.char_or_not = 1;
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
   // scanf("%s", input_str);
-  strcpy(input_str, "(1*((2+3-4)/23))^2");
+  strcpy(input_str, "(42*((43+3-4)/23))^2");
+  // strcpy(input_str, "43+43");
   if (validator(input_str)) {
     parser(input_str, &output_str, &stack);
     printf("Stack\n");
@@ -83,7 +83,8 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
     }
     if (input_str[i] == ')') {
       while (peek(stack) != '(') {
-        output_str->data[output_str->size] = pop(stack);
+        output_str->operation[output_str->size] = pop(stack);
+        output_str->char_or_not[output_str->size] = 1;
         output_str->size++;
       }
       nulldata(stack);
@@ -98,7 +99,8 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
   }
   // опустошение стека
   while (stack->size != 0) {
-    output_str->data[output_str->size] = pop(stack);
+    output_str->operation[output_str->size] = pop(stack);
+    output_str->char_or_not[output_str->size] = 1;
     output_str->size++;
   }
 }
@@ -148,7 +150,8 @@ void parser_operation(char *input_str, create_stack *stack,
 
     else if (diff_priority <= 0) {
       while (stack->size != 0 && peek(stack) != '(' && diff_priority <= 0) {
-        output_str->data[output_str->size] = pop(stack);
+        output_str->operation[output_str->size] = pop(stack);
+        output_str->char_or_not[output_str->size] = 1;
         output_str->size++;
         diff_priority =
             priority(input_str[i]) - stack->priority[stack->size - 1];

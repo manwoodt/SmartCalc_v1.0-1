@@ -16,10 +16,10 @@
 
 typedef struct {
   int data[STACK_MAX_SIZE];
-
+  char operation[STACK_MAX_SIZE];
   // size – это количество элементов, и вместе с тем указатель на вершину стека.
   size_t size;
-  int char_or_not;
+  int char_or_not[STACK_MAX_SIZE];
   int priority[STACK_MAX_SIZE];
 } create_stack;
 
