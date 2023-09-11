@@ -33,6 +33,8 @@ int isoperation(int operation);
 int validator(char *input_str);
 int garbage_for_validator(int operation);
 
+int is_number(int operation);
+
 void parser(char *input_str, create_stack *output_str, create_stack *stack);
 void parser_operand(char *input_str, create_stack *output_str,
                     long unsigned int *i);

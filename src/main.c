@@ -1,19 +1,18 @@
 #include "calc.h"
 
 int main() {
-  // создаем стек и выходную строку
   create_stack output_str = {0};
   create_stack stack = {0};
   create_stack stack_res = {0};
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
-  // scanf("%s", input_str);
+  scanf("%s", input_str);
+  // strcpy(input_str, "3 + 5");
   // strcpy(input_str, "(42*((43+3-4)/23))^2");
-  strcpy(input_str, "(43+43-5)/9");
+  // strcpy(input_str, "(43+43-5)/9");
+
   if (validator(input_str)) {
     parser(input_str, &output_str, &stack);
-    // printf("Stack\n");
-    // printStack(stack);
     // printf("Output_str\n");
     // printStack(output_str);
     int res = calculation(&output_str, &stack_res);
@@ -50,7 +49,7 @@ int validator(char *input_str) {
   int correct = 1;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
-  int is_number = 0;
+  int number_flag = 0;
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
@@ -66,12 +65,13 @@ int validator(char *input_str) {
     // пустые скобки
     if (input_str[i] == '(' && input_str[i + 1] == ')') correct = 0;
     if (is_right_bracket > is_left_bracket) correct = 0;
-    if (input_str[i] >= '0' && input_str[i] <= '9') is_number = 1;
+    if (is_number(input_str[i])) number_flag = 1;
+    if ((input_str[i]) == ' ') correct = 0;
   }
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 0;
 
-  if (!is_number) correct = 0;
+  if (!number_flag) correct = 0;
   return correct;
 }
 
@@ -91,7 +91,7 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
       nulldata(stack);
     }
     // операнды
-    if (input_str[i] >= '0' && input_str[i] <= '9') {
+    if (is_number(input_str[i])) {
       parser_operand(input_str, output_str, &i);
       // операции
     } else if (isoperation(input_str[i])) {
@@ -104,44 +104,6 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
     output_str->char_or_not[output_str->size] = 1;
     output_str->size++;
   }
-}
-
-int calculation(create_stack *output_str, create_stack *stack_res) {
-  int num1 = 0;
-  int num2 = 0;
-  for (long unsigned int i = 0; i < output_str->size; i++) {
-    // если число
-    if (output_str->char_or_not[i] == 0) {
-      push(stack_res, output_str->data[i]);
-    }
-    // если операция
-    else {
-      num1 = peek(stack_res);
-      nulldata(stack_res);
-      num2 = peek(stack_res);
-      nulldata(stack_res);
-      switch (output_str->operation[i]) {
-        case '+':
-          push(stack_res, num2 + num1);
-          break;
-        case '-':
-          push(stack_res, num2 - num1);
-          break;
-        case '*':
-          push(stack_res, num2 * num1);
-          break;
-        case '/':
-          push(stack_res, num2 / num1);
-          break;
-        case '^':
-          push(stack_res, pow(num2, num1));
-          break;
-        default:
-          break;
-      }
-    }
-  }
-  return peek(stack_res);
 }
 
 void parser_operation(char *input_str, create_stack *stack,
@@ -224,6 +186,44 @@ int priority(int operation) {
   return priority;
 }
 
+int calculation(create_stack *output_str, create_stack *stack_res) {
+  int num1 = 0;
+  int num2 = 0;
+  for (long unsigned int i = 0; i < output_str->size; i++) {
+    // если число
+    if (output_str->char_or_not[i] == 0) {
+      push(stack_res, output_str->data[i]);
+    }
+    // если операция
+    else {
+      num1 = peek(stack_res);
+      nulldata(stack_res);
+      num2 = peek(stack_res);
+      nulldata(stack_res);
+      switch (output_str->operation[i]) {
+        case '+':
+          push(stack_res, num2 + num1);
+          break;
+        case '-':
+          push(stack_res, num2 - num1);
+          break;
+        case '*':
+          push(stack_res, num2 * num1);
+          break;
+        case '/':
+          push(stack_res, num2 / num1);
+          break;
+        case '^':
+          push(stack_res, pow(num2, num1));
+          break;
+        default:
+          break;
+      }
+    }
+  }
+  return peek(stack_res);
+}
+
 int isoperation(int operation) {
   if (operation == '+' || operation == '-' || operation == '*' ||
       operation == '/' || operation == '^')
@@ -235,9 +235,12 @@ int isoperation(int operation) {
 int garbage_for_validator(int operation) {
   if (operation == '+' || operation == '-' || operation == '*' ||
       operation == '/' || operation == '^' || operation == '(' ||
-      operation == ')' || (operation >= '0' && operation <= '9'))
+      operation == ')' || is_number(operation))
     return 0;
   else
     return 1;
 }
-// int is_number
+
+int is_number(int operation) {
+  return (operation >= '0' && operation <= '9') ? 1 : 0;
+}
