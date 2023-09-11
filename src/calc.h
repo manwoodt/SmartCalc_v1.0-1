@@ -6,7 +6,7 @@
 #include <string.h>
 
 // #include <ctype.h>
-// #include <math.h>
+#include <math.h>
 // #include <stdarg.h>
 // #include <stdint.h>
 #define STACK_OVERFLOW 1
@@ -38,4 +38,6 @@ void parser_operand(char *input_str, create_stack *output_str,
                     long unsigned int *i);
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i);
+
+int calculation(create_stack *output_str, create_stack *stack_res);
 #endif /*S21_STRING_H*/

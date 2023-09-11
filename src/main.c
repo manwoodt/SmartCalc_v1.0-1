@@ -4,19 +4,20 @@ int main() {
   // создаем стек и выходную строку
   create_stack output_str = {0};
   create_stack stack = {0};
-  // create_stack stack_res = {0};
+  create_stack stack_res = {0};
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
   // scanf("%s", input_str);
-  strcpy(input_str, "(42*((43+3-4)/23))^2");
-  // strcpy(input_str, "43+43");
+  // strcpy(input_str, "(42*((43+3-4)/23))^2");
+  strcpy(input_str, "(43+43-5)/9");
   if (validator(input_str)) {
     parser(input_str, &output_str, &stack);
-    printf("Stack\n");
-    printStack(stack);
-    printf("Output_str\n");
-    printStack(output_str);
-
+    // printf("Stack\n");
+    // printStack(stack);
+    // printf("Output_str\n");
+    // printStack(output_str);
+    int res = calculation(&output_str, &stack_res);
+    printf("res: %d", res);
   } else
     printf("ERROR\n");
 
@@ -104,36 +105,45 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
     output_str->size++;
   }
 }
-/*
-int calculation(create_stack *output_str, create_stack *stack_res) {
-  for (long unsigned int i = 0; i < strlen(output_str); i++) {
-    // если число
-    if ((output_str->data[i] >= '0' && output_str->data[i] <= '9')) {
-      push(stack, input_str[i]);
-    }
 
-    if (input_str[i] == ')') {
-      while (peek(stack) != '(') {
-        output_str->data[output_str->size] = pop(stack);
-        output_str->size++;
+int calculation(create_stack *output_str, create_stack *stack_res) {
+  int num1 = 0;
+  int num2 = 0;
+  for (long unsigned int i = 0; i < output_str->size; i++) {
+    // если число
+    if (output_str->char_or_not[i] == 0) {
+      push(stack_res, output_str->data[i]);
+    }
+    // если операция
+    else {
+      num1 = peek(stack_res);
+      nulldata(stack_res);
+      num2 = peek(stack_res);
+      nulldata(stack_res);
+      switch (output_str->operation[i]) {
+        case '+':
+          push(stack_res, num2 + num1);
+          break;
+        case '-':
+          push(stack_res, num2 - num1);
+          break;
+        case '*':
+          push(stack_res, num2 * num1);
+          break;
+        case '/':
+          push(stack_res, num2 / num1);
+          break;
+        case '^':
+          push(stack_res, pow(num2, num1));
+          break;
+        default:
+          break;
       }
-      nulldata(stack);
-    }
-    // операнды
-    if (input_str[i] >= '0' && input_str[i] <= '9') {
-      parser_operand(input_str, output_str, &i);
-      // операции
-    } else if (isoperation(input_str[i])) {
-      parser_operation(input_str, stack, output_str, i);
     }
   }
-  // опустошение стека
-  while (stack->size != 0) {
-    output_str->data[output_str->size] = pop(stack);
-    output_str->size++;
-  }
+  return peek(stack_res);
 }
-*/
+
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i) {
   int diff_priority = 0;
