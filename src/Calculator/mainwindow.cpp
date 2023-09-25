@@ -39,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_ln, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_sqrt, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_dot, SIGNAL(clicked()), this,SLOT(digits_numbers()));
+
+    connect(ui->pushButton_C, SIGNAL(clicked()), this,SLOT(delete_all_text()));
+    connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
 }
 
 MainWindow::~MainWindow()
@@ -47,18 +50,37 @@ MainWindow::~MainWindow()
 }
 
 
-
-
   void MainWindow::digits_numbers(){
-QPushButton *button = (QPushButton *) sender();
+    QPushButton *button = (QPushButton *) sender();
     ui->result->setText(ui->result->text() + button->text());
-//    QString new_label;
-//    double numbers;
-//    numbers = (ui->result->text() + button->text()).toDouble();
-//    new_label = QString::number(numbers,'g', 15);
-//    ui->result->setText(new_label);
-
 }
 
+  void MainWindow::delete_all_text(){
+    ui->result->setText("");
+}
+
+  void MainWindow::backspace(){
+    QString text = ui->result->text();
+    if (!text.isEmpty()) {
+      QString lastChar = text.right(4);
+      if (lastChar == "asin" || lastChar == "acos" || lastChar == "atan" ||
+          lastChar == "sqrt") {
+        text = text.left(text.length() - 4);
+      } else {
+        lastChar = text.right(3);
+        if (lastChar == "sin" || lastChar == "cos" || lastChar == "tan" ||
+            lastChar == "log") {
+          text = text.left(text.length() - 3);
+        } else {
+          lastChar = text.right(2);
+          if (lastChar == "ln")
+            text = text.left(text.length() - 2);
+          else
+            text = text.left(text.length() - 1);
+        }
+      }
+      ui->result->setText(text);
+    }
+}
 
 

@@ -23,5 +23,7 @@ private:
     Ui::MainWindow *ui;
 private slots:
     void digits_numbers();
+    void delete_all_text();
+    void backspace();
 };
 #endif // MAINWINDOW_H
