@@ -6,8 +6,8 @@ int main() {
   create_stack stack_res = {0};
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
-  scanf("%s", input_str);
-  // strcpy(input_str, "3 + 5");
+  // scanf("%s", input_str);
+  strcpy(input_str, "3 + 5");
   // strcpy(input_str, "(42*((43+3-4)/23))^2");
   // strcpy(input_str, "(43+43-5)/9");
 
