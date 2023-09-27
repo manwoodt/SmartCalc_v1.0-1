@@ -4,8 +4,8 @@
 // положить число в стек
 void push(create_stack *stack, int value) {
   if (stack->size >= STACK_MAX_SIZE) {
-    exit(STACK_OVERFLOW);
     printf("STACK_OVERFLOW");
+    exit(STACK_OVERFLOW);
   }
   stack->data[stack->size] = value;
   if (stack->char_or_not) {
@@ -26,7 +26,7 @@ int pop(create_stack *stack) {
 
 // посмотреть последнее число из стека
 int peek(const create_stack *stack) {
-  if (stack->size <= 0) {
+  if (stack->size == 0) {
     printf("STACK_UNDERFLOW peek");
     exit(STACK_UNDERFLOW);
   }
@@ -58,13 +58,15 @@ void printStack(create_stack stack) {
 }
 */
 
-void printStack(create_stack stack) {
-  printf("stack size: %ld\n", stack.size);
-  for (long unsigned int i = 0; i < stack.size; i++) {
-    if (stack.char_or_not[i])
-      printf("%c | ", stack.operation[i]);
-    else
-      printf("%i | ", stack.data[i]);
-  }
-  printf("\n\n");
-}
+// second version
+
+// void printStack(create_stack stack) {
+//   printf("stack size: %ld\n", stack.size);
+//   for (long unsigned int i = 0; i < stack.size; i++) {
+//     if (stack.char_or_not[i])
+//       printf("%c | ", stack.operation[i]);
+//     else
+//       printf("%i | ", stack.data[i]);
+//   }
+//   printf("\n\n");
+// }

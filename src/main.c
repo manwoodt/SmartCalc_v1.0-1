@@ -7,7 +7,7 @@ int main() {
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
   // scanf("%s", input_str);
-  strcpy(input_str, "3 + 5");
+  strcpy(input_str, "3+5");
   // strcpy(input_str, "(42*((43+3-4)/23))^2");
   // strcpy(input_str, "(43+43-5)/9");
 
@@ -108,19 +108,16 @@ void parser(char *input_str, create_stack *output_str, create_stack *stack) {
 
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i) {
-  int diff_priority = 0;
   if (stack->size == 0) {
     push(stack, input_str[i]);
   } else {
+    int diff_priority =
+        priority(input_str[i]) - stack->priority[stack->size - 1];
     // больше 0 = текущее число имеет больший приоритет чем последнее
     // число в стеке
-    diff_priority = priority(input_str[i]) - stack->priority[stack->size - 1];
-
     if (diff_priority > 0) {
       push(stack, input_str[i]);
-    }
-
-    else if (diff_priority <= 0) {
+    } else {
       while (stack->size != 0 && peek(stack) != '(' && diff_priority <= 0) {
         output_str->operation[output_str->size] = pop(stack);
         output_str->char_or_not[output_str->size] = 1;
@@ -136,7 +133,7 @@ void parser_operation(char *input_str, create_stack *stack,
   }
 }
 
-void parser_operand(char *input_str, create_stack *output_str,
+void parser_operand(const char *input_str, create_stack *output_str,
                     long unsigned int *i) {
   char *lex_num = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   int lex_num_index = 0;
@@ -187,8 +184,6 @@ int priority(int operation) {
 }
 
 int calculation(create_stack *output_str, create_stack *stack_res) {
-  int num1 = 0;
-  int num2 = 0;
   for (long unsigned int i = 0; i < output_str->size; i++) {
     // если число
     if (output_str->char_or_not[i] == 0) {
@@ -196,9 +191,9 @@ int calculation(create_stack *output_str, create_stack *stack_res) {
     }
     // если операция
     else {
-      num1 = peek(stack_res);
+      int num1 = peek(stack_res);
       nulldata(stack_res);
-      num2 = peek(stack_res);
+      int num2 = peek(stack_res);
       nulldata(stack_res);
       switch (output_str->operation[i]) {
         case '+':
