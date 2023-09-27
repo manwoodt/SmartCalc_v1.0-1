@@ -67,19 +67,20 @@ MainWindow::~MainWindow()
       char *input_expr = expression.data();
      // char *input_x = x_value.data();
       int x_for_graph = 0;
-      int res_err = validator(input_expr);
+      int is_correct = validator(input_expr);
       double res_num = 0;
 
-      if (res_err){
-         ui->result->setText("error");
-       } else {
+      if (is_correct){
          ui->result->setText("ok");
-////         res_num = parser_calculator(input_expr, input_x, x_for_graph, 0.0);
-////         QString result = QString::number(res_num, 'g', 15);
-////         ui->line_edited->setText(result);
-      }
 
-     // ui->insert_x->clear();
+         res_num = parser(input_expr);
+         QString result_value = QString::number(res_num, 'g', 15);
+         ui->result->setText(result_value);
+       } else {
+         ui->result->setText("error");
+
+      }
+      ui->insert_x->clear();
 }
 
 

@@ -1,9 +1,8 @@
 #include "calc.h"
-
+/*
 int main() {
-  create_stack output_str = {0};
-  create_stack stack = {0};
-  create_stack stack_res = {0};
+
+
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 
   // scanf("%s", input_str);
@@ -24,6 +23,7 @@ int main() {
 
   return 0;
 }
+*/
 
 /*
  алгоритм преобразующий инфикс в постфикс:
@@ -75,35 +75,39 @@ int validator(char *input_str) {
   return correct;
 }
 
-void parser(char *input_str, create_stack *output_str, create_stack *stack) {
+double parser(char *input_str) {
+  create_stack output_str = {0};
+  create_stack stack = {0};
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
     // while (input_str[i] == ' ') i++;
 
     if (input_str[i] == '(') {
-      push(stack, input_str[i]);
+      push(&stack, input_str[i]);
     }
     if (input_str[i] == ')') {
-      while (peek(stack) != '(') {
-        output_str->operation[output_str->size] = pop(stack);
-        output_str->char_or_not[output_str->size] = 1;
-        output_str->size++;
+      while (peek(&stack) != '(') {
+        output_str.operation[output_str.size] = pop(&stack);
+        output_str.char_or_not[output_str.size] = 1;
+        output_str.size++;
       }
-      nulldata(stack);
+      nulldata(&stack);
     }
     // операнды
     if (is_number(input_str[i])) {
-      parser_operand(input_str, output_str, &i);
+      parser_operand(input_str, &output_str, &i);
       // операции
     } else if (isoperation(input_str[i])) {
-      parser_operation(input_str, stack, output_str, i);
+      parser_operation(input_str, &stack, &output_str, i);
     }
   }
   // опустошение стека
-  while (stack->size != 0) {
-    output_str->operation[output_str->size] = pop(stack);
-    output_str->char_or_not[output_str->size] = 1;
-    output_str->size++;
+  while (stack.size != 0) {
+    output_str.operation[output_str.size] = pop(&stack);
+    output_str.char_or_not[output_str.size] = 1;
+    output_str.size++;
   }
+
+  return calculation(&output_str);
 }
 
 void parser_operation(char *input_str, create_stack *stack,
@@ -183,40 +187,41 @@ int priority(int operation) {
   return priority;
 }
 
-int calculation(create_stack *output_str, create_stack *stack_res) {
+double calculation(create_stack *output_str) {
+  create_stack stack_res = {0};
   for (long unsigned int i = 0; i < output_str->size; i++) {
     // если число
     if (output_str->char_or_not[i] == 0) {
-      push(stack_res, output_str->data[i]);
+      push(&stack_res, output_str->data[i]);
     }
     // если операция
     else {
-      int num1 = peek(stack_res);
-      nulldata(stack_res);
-      int num2 = peek(stack_res);
-      nulldata(stack_res);
+      double num1 = peek(&stack_res);
+      nulldata(&stack_res);
+      double num2 = peek(&stack_res);
+      nulldata(&stack_res);
       switch (output_str->operation[i]) {
         case '+':
-          push(stack_res, num2 + num1);
+          push(&stack_res, num2 + num1);
           break;
         case '-':
-          push(stack_res, num2 - num1);
+          push(&stack_res, num2 - num1);
           break;
         case '*':
-          push(stack_res, num2 * num1);
+          push(&stack_res, num2 * num1);
           break;
         case '/':
-          push(stack_res, num2 / num1);
+          push(&stack_res, num2 / num1);
           break;
         case '^':
-          push(stack_res, pow(num2, num1));
+          push(&stack_res, pow(num2, num1));
           break;
         default:
           break;
       }
     }
   }
-  return peek(stack_res);
+  return peek(&stack_res);
 }
 
 int isoperation(int operation) {

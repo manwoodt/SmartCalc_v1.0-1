@@ -35,11 +35,11 @@ int garbage_for_validator(int operation);
 
 int is_number(int operation);
 
-void parser(char *input_str, create_stack *output_str, create_stack *stack);
+double parser(char *input_str);
 void parser_operand(const char *input_str, create_stack *output_str,
                     long unsigned int *i);
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i);
 
-int calculation(create_stack *output_str, create_stack *stack_res);
+double calculation(create_stack *output_str);
 #endif /*S21_STRING_H*/
