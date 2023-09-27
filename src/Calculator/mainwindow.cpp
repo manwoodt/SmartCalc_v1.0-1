@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButton_C, SIGNAL(clicked()), this,SLOT(delete_all_text()));
     connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
+
+    connect(ui->pushButton_equal, SIGNAL(clicked()), this,SLOT(equal()));
 }
 
 MainWindow::~MainWindow()
@@ -58,6 +60,28 @@ MainWindow::~MainWindow()
   void MainWindow::delete_all_text(){
     ui->result->setText("");
 }
+
+  void MainWindow::equal(){
+      QByteArray expression = ui->result->text().toLocal8Bit();
+    //  QByteArray x_value = ui->insert_x->text().toLocal8Bit();
+      char *input_expr = expression.data();
+     // char *input_x = x_value.data();
+      int x_for_graph = 0;
+      int res_err = validator(input_expr);
+      double res_num = 0;
+
+      if (res_err){
+         ui->result->setText("error");
+       } else {
+         ui->result->setText("ok");
+////         res_num = parser_calculator(input_expr, input_x, x_for_graph, 0.0);
+////         QString result = QString::number(res_num, 'g', 15);
+////         ui->line_edited->setText(result);
+      }
+
+     // ui->insert_x->clear();
+}
+
 
   void MainWindow::backspace(){
     QString text = ui->result->text();

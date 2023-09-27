@@ -178,5 +178,20 @@
         <source>X =</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="mainwindow.ui" line="1159"/>
+        <source>graph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1191"/>
+        <source>credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1223"/>
+        <source>deposit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

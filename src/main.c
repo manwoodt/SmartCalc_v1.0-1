@@ -240,7 +240,6 @@ int garbage_for_validator(int operation) {
   else
     return 1;
 }
-
 int is_number(int operation) {
   return (operation >= '0' && operation <= '9') ? 1 : 0;
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Calculator VERSION 0.1 LANGUAGES CXX)
+project(Calculator VERSION 0.1 LANGUAGES CXX C)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -21,6 +21,9 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        ../main.c
+        ../stack.c
+        ../calc.h
         ${TS_FILES}
 )
 

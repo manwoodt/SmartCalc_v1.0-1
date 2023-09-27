@@ -25,5 +25,6 @@ private slots:
     void digits_numbers();
     void delete_all_text();
     void backspace();
+    void equal();
 };
 #endif // MAINWINDOW_H
