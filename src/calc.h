@@ -15,7 +15,7 @@
 #define INPUT_STR_MAX_SIZE 255
 
 typedef struct {
-  int data[STACK_MAX_SIZE];
+  double data[STACK_MAX_SIZE];
   char operation[STACK_MAX_SIZE];
   // size – это количество элементов, и вместе с тем указатель на вершину стека.
   size_t size;
@@ -24,9 +24,9 @@ typedef struct {
 } create_stack;
 
 void printStack(create_stack stack);
-void push(create_stack *stack, int value);
-int pop(create_stack *stack);
-int peek(const create_stack *stack);
+void push(create_stack *stack, double value);
+double pop(create_stack *stack);
+double peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
 int isoperation(int operation);

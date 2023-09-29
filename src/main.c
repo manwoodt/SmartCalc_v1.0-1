@@ -1,30 +1,30 @@
 #include "calc.h"
 
 int main() {
-  create_stack output_str = {0};
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   // scanf("%s", input_str);
   // strcpy(input_str, "3+5");
-  // strcpy(input_str, "cos(3)");
-  strcpy(input_str, "log10");
-  // strcpy(input_str, "sqrt(100)");
-  // strcpy(input_str, "tg(1)");
+  strcpy(input_str, "acos1");
+  // strcpy(input_str, "log10");
+  //    strcpy(input_str, "sqrt(100)");
+  //  strcpy(input_str, "tan(1)");
 
   // strcpy(input_str, "(42*((43+3-4)/23))^2");
   //  strcpy(input_str, "(43+43-5)/9");
   printf("BEF: %s\n", input_str);
   if (validator(input_str, cor_input_str)) {
-    parser(input_str);
+    printf("AFT: %s\n", cor_input_str);
+    double res = parser(cor_input_str);
     // printf("Output_str\n");
     // printStack(output_str);
-    double res = calculation(&output_str);
     printf("res: %f\n", res);
   } else
     printf("ERROR\n");
-  printf("AFT: %s\n", cor_input_str);
+
   free(input_str);
   free(cor_input_str);
+
   return 0;
 }
 
@@ -74,17 +74,17 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
                         unsigned int *j) {
   // cos
   if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
-      input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
+      input_str[*i + 2] == 's') {
     cor_input_str[*j] = 'c';
     *i += 2;
   } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'i' &&
              input_str[*i + 2] == 'n' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 's';
     *i += 2;
-  } else if ((input_str[*i]) == 't' && input_str[*i + 1] == 'g' &&
-             input_str[*i + 3] == '(') {
+  } else if ((input_str[*i]) == 't' && input_str[*i + 1] == 'a' &&
+             input_str[*i + 2] == 'n' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 't';
-    (*i)++;
+    *i += 2;
   } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'o' &&
              input_str[*i + 2] == 'g' && is_number(input_str[*i + 3])) {
     cor_input_str[*j] = 'l';
@@ -133,6 +133,7 @@ double parser(char *input_str) {
   // опустошение стека
   while (stack.size != 0) {
     output_str.operation[output_str.size] = pop(&stack);
+    output_str.priority[output_str.size] = stack.priority[stack.size];
     output_str.char_or_not[output_str.size] = 1;
     output_str.size++;
   }
@@ -295,12 +296,13 @@ double calculation(create_stack *output_str) {
       // cos - c, sin - s, tg - t, ctg - g, log - l, ln - n, sqrt - q
     }
   }
+
   return peek(&stack_res);
 }
 
 int isoperation(int operation) {
   if (operation == '+' || operation == '-' || operation == '*' ||
-      operation == '/' || operation == '^')
+      operation == '/' || operation == '^' || is_trigonometry(operation))
     return 1;
   else
     return 0;
@@ -323,7 +325,7 @@ int is_trigonometry(int operation) {
   return (operation == 'c' || operation == 'o' || operation == 's' ||
           operation == 'i' || operation == 'n' || operation == 't' ||
           operation == 'g' || operation == 'l' || operation == 'q' ||
-          operation == 'r')
+          operation == 'r' || operation == 'a')
              ? 1
              : 0;
 }
