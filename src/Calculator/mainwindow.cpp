@@ -65,15 +65,16 @@ MainWindow::~MainWindow()
       QByteArray expression = ui->result->text().toLocal8Bit();
     //  QByteArray x_value = ui->insert_x->text().toLocal8Bit();
       char *input_expr = expression.data();
+      char changed_input_expr [255]{0};
      // char *input_x = x_value.data();
       int x_for_graph = 0;
-      int is_correct = validator(input_expr);
+      int is_correct = validator(input_expr, changed_input_expr);
       double res_num = 0;
 
       if (is_correct){
          ui->result->setText("ok");
 
-         res_num = parser(input_expr);
+         res_num = parser(changed_input_expr);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);
        } else {

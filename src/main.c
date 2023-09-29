@@ -1,56 +1,40 @@
 #include "calc.h"
-/*
+
 int main() {
-
-
+  create_stack output_str = {0};
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
-
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   // scanf("%s", input_str);
-  strcpy(input_str, "3+5");
-  // strcpy(input_str, "(42*((43+3-4)/23))^2");
-  // strcpy(input_str, "(43+43-5)/9");
+  // strcpy(input_str, "3+5");
+  // strcpy(input_str, "cos(3)");
+  strcpy(input_str, "log10");
+  // strcpy(input_str, "sqrt(100)");
+  // strcpy(input_str, "tg(1)");
 
-  if (validator(input_str)) {
-    parser(input_str, &output_str, &stack);
+  // strcpy(input_str, "(42*((43+3-4)/23))^2");
+  //  strcpy(input_str, "(43+43-5)/9");
+  printf("BEF: %s\n", input_str);
+  if (validator(input_str, cor_input_str)) {
+    parser(input_str);
     // printf("Output_str\n");
     // printStack(output_str);
-    int res = calculation(&output_str, &stack_res);
-    printf("res: %d", res);
+    double res = calculation(&output_str);
+    printf("res: %f\n", res);
   } else
     printf("ERROR\n");
-
+  printf("AFT: %s\n", cor_input_str);
   free(input_str);
-
+  free(cor_input_str);
   return 0;
 }
-*/
 
-/*
- алгоритм преобразующий инфикс в постфикс:
-
-Сканируйте вводимую строку слева направо символ за символом.
-Если символ является операндом, поместите его в стек вывода.
-Если символ является оператором, а стек оператора пуст, вставьте оператора в
-стек операторов. Если стек оператора не пуст, могут быть следующие возможности.
-Если приоритет сканируемого оператора больше, чем у самого верхнего оператора
-стека операторов, поместите этот оператор в стек операндов. Если приоритет
-отсканированного оператора меньше или равен самому верхнему оператору стека
-операторов, извлекайте операторы из стека операндов до тех пор, пока мы не
-найдем оператор с более низким приоритетом, чем отсканированный символ. Никогда
-не выскакивайте ( ‘(‘ ) или ( ‘)’ ), каким бы ни был уровень приоритета
-отсканированного символа. Если символ открывает круглую скобку ( ‘(‘ ), вставьте
-его в стек оператора. Если символ закрывает круглую скобку ( ‘)’ ), вытаскивайте
-операторы из стека операторов, пока мы не найдем открывающую скобку (‘(‘ ).
-Теперь извлеките все оставшиеся операторы из стека оператора и вставьте в стек
-вывода.
-*/
-
-int validator(char *input_str) {
+int validator(char *input_str, char *cor_input_str) {
   int correct = 1;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
   int number_flag = 0;
-  for (long unsigned int i = 0; i < strlen(input_str); i++) {
+  int res = 0;
+  for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
       correct = 0;
@@ -67,12 +51,58 @@ int validator(char *input_str) {
     if (is_right_bracket > is_left_bracket) correct = 0;
     if (is_number(input_str[i])) number_flag = 1;
     if ((input_str[i]) == ' ') correct = 0;
+
+    // cos...
+    res = is_trigonometry(input_str[i]);
+    if (res) {
+      if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
+    } else {
+      cor_input_str[j] = input_str[i];
+      j++;
+    }
   }
+
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 0;
 
   if (!number_flag) correct = 0;
   return correct;
+}
+
+// cos - c, sin - s, tg - t, ctg - g, log - l, ln - n, sqrt - q
+int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
+                        unsigned int *j) {
+  // cos
+  if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
+      input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
+    cor_input_str[*j] = 'c';
+    *i += 2;
+  } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'i' &&
+             input_str[*i + 2] == 'n' && input_str[*i + 3] == '(') {
+    cor_input_str[*j] = 's';
+    *i += 2;
+  } else if ((input_str[*i]) == 't' && input_str[*i + 1] == 'g' &&
+             input_str[*i + 3] == '(') {
+    cor_input_str[*j] = 't';
+    (*i)++;
+  } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'o' &&
+             input_str[*i + 2] == 'g' && is_number(input_str[*i + 3])) {
+    cor_input_str[*j] = 'l';
+    *i += 2;
+  } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'n' &&
+             is_number(input_str[*i + 2])) {
+    cor_input_str[*j] = 'g';
+    *i += 1;
+  } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'q' &&
+             input_str[*i + 2] == 'r' && input_str[*i + 3] == 't' &&
+             input_str[*i + 3] == '(') {
+    cor_input_str[*j] = 'q';
+    *i += 3;
+  } else {
+    return 1;
+  }
+  (*j)++;
+  return 0;
 }
 
 double parser(char *input_str) {
@@ -173,13 +203,31 @@ int priority(int operation) {
     case '^':
       priority = 3;
       break;
-    case ')':
+    case 'c':
       priority = 4;
       break;
-    case '(':
+    case 's':
+      priority = 4;
+      break;
+    case 't':
+      priority = 4;
+      break;
+    case 'q':
+      priority = 4;
+      break;
+    case 'l':
+      priority = 4;
+      break;
+    case 'n':
+      priority = 4;
+      break;
+    case ')':
       priority = 5;
       break;
-
+    case '(':
+      priority = 6;
+      break;
+    // cos - c, sin - s, tg - t, ctg - g, log - l, ln - n, sqrt - q
     default:
       priority = 0;
       break;
@@ -198,27 +246,53 @@ double calculation(create_stack *output_str) {
     else {
       double num1 = peek(&stack_res);
       nulldata(&stack_res);
-      double num2 = peek(&stack_res);
-      nulldata(&stack_res);
-      switch (output_str->operation[i]) {
-        case '+':
-          push(&stack_res, num2 + num1);
-          break;
-        case '-':
-          push(&stack_res, num2 - num1);
-          break;
-        case '*':
-          push(&stack_res, num2 * num1);
-          break;
-        case '/':
-          push(&stack_res, num2 / num1);
-          break;
-        case '^':
-          push(&stack_res, pow(num2, num1));
-          break;
-        default:
-          break;
+      if (output_str->priority[i] == 4) {
+        switch (output_str->operation[i]) {
+          case 'c':
+            push(&stack_res, cos(num1));
+            break;
+          case 's':
+            push(&stack_res, sin(num1));
+            break;
+          case 't':
+            push(&stack_res, tan(num1));
+            break;
+          case 'l':
+            push(&stack_res, log(num1));
+            break;
+          case 'n':
+            push(&stack_res, log10(num1));
+            break;
+          case 'q':
+            push(&stack_res, sqrt(num1));
+            break;
+          default:
+            break;
+        }
+      } else {
+        double num2 = peek(&stack_res);
+        nulldata(&stack_res);
+        switch (output_str->operation[i]) {
+          case '+':
+            push(&stack_res, num2 + num1);
+            break;
+          case '-':
+            push(&stack_res, num2 - num1);
+            break;
+          case '*':
+            push(&stack_res, num2 * num1);
+            break;
+          case '/':
+            push(&stack_res, num2 / num1);
+            break;
+          case '^':
+            push(&stack_res, pow(num2, num1));
+            break;
+          default:
+            break;
+        }
       }
+      // cos - c, sin - s, tg - t, ctg - g, log - l, ln - n, sqrt - q
     }
   }
   return peek(&stack_res);
@@ -235,11 +309,21 @@ int isoperation(int operation) {
 int garbage_for_validator(int operation) {
   if (operation == '+' || operation == '-' || operation == '*' ||
       operation == '/' || operation == '^' || operation == '(' ||
-      operation == ')' || is_number(operation))
+      operation == ')' || is_number(operation) || is_trigonometry(operation))
     return 0;
   else
     return 1;
 }
+
 int is_number(int operation) {
   return (operation >= '0' && operation <= '9') ? 1 : 0;
+}
+
+int is_trigonometry(int operation) {
+  return (operation == 'c' || operation == 'o' || operation == 's' ||
+          operation == 'i' || operation == 'n' || operation == 't' ||
+          operation == 'g' || operation == 'l' || operation == 'q' ||
+          operation == 'r')
+             ? 1
+             : 0;
 }
