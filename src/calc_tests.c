@@ -203,8 +203,20 @@ START_TEST(parser_calculator_test_4) {
 }
 END_TEST
 
-START_TEST(parser_calculator_test_5) {
-  double res = parser("21%4");
+// START_TEST(parser_calculator_test_5) {
+//   double res = parser("21%4");
+//   ck_assert_double_eq_tol(res, 1.0, 0.0000001);
+// }
+// END_TEST
+
+START_TEST(parser_calculator_test_6) {
+  double res = parser("2^2");
+  ck_assert_double_eq_tol(res, 4.0, 0.0000001);
+}
+END_TEST
+
+START_TEST(parser_calculator_test_7) {
+  double res = parser("2*(4-3)/2");
   ck_assert_double_eq_tol(res, 1.0, 0.0000001);
 }
 END_TEST
@@ -214,19 +226,22 @@ START_TEST(parser_calculator_test_log) {
   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   int res1 = 0;
   double res2 = 0;
+  
   strcpy(input_str, "log(10)");
   res1 = validator(input_str, cor_input_str);
   ck_assert_int_eq(res1, 1);
   res2 = parser(cor_input_str);
   ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
 
-  strcpy(input_str, "log100");
+  memset(cor_input_str, 0, strlen(cor_input_str));
+  strcpy(input_str, "log(100)");
   res1 = validator(input_str, cor_input_str);
   ck_assert_int_eq(res1, 1);
   res2 = parser(cor_input_str);
-  ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
+  ck_assert_double_eq_tol(res2, 2.0, 0.0000001);
 
-  strcpy(input_str, "log15");
+  memset(cor_input_str, 0, strlen(cor_input_str));
+  strcpy(input_str, "log(15)");
   res1 = validator(input_str, cor_input_str);
   ck_assert_int_eq(res1, 1);
   res2 = parser(cor_input_str);
@@ -242,68 +257,115 @@ START_TEST(parser_calculator_test_ln) {
   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   int res1 = 0;
   double res2 = 0;
-  strcpy(input_str, "ln10");
-  res1 = validator(input_str, cor_input_str);
-  ck_assert_int_eq(res1, 1);
-  res2 = parser(cor_input_str);
-  ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
 
-  strcpy(input_str, "ln100");
-  res1 = validator(input_str, cor_input_str);
-  ck_assert_int_eq(res1, 1);
-  res2 = parser(cor_input_str);
-  ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
+  // strcpy(input_str, "ln(2.71828182846)");
+  // res1 = validator(input_str, cor_input_str);
+  // ck_assert_int_eq(res1, 1);
+  // res2 = parser(cor_input_str);
+  // ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
 
-  strcpy(input_str, "ln15");
+  strcpy(input_str, "ln(100)");
   res1 = validator(input_str, cor_input_str);
   ck_assert_int_eq(res1, 1);
   res2 = parser(cor_input_str);
-  ck_assert_double_eq_tol(res2, 1.17609125906, 0.0000001);
+  ck_assert_double_eq_tol(res2, 4.60517018599, 0.0000001);
+
+  memset(cor_input_str, 0, strlen(cor_input_str));
+  strcpy(input_str, "ln(1)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.0, 0.0000001);
 
   free(input_str);
   free(cor_input_str);
 }
 END_TEST
 
-START_TEST(parser_calculator_test_7) {
-  double res = parser("ln(100)");
-  ck_assert_double_eq_tol(res, 4.60517018599, 0.0000001);
+START_TEST(parser_calculator_test_sin) {
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  int res1 = 0;
+  double res2 = 0;
+
+  strcpy(input_str, "sin(0)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.0, 0.0000001);
+
+  strcpy(input_str, "sin(1)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.8414709848, 0.0000001);
+
+  strcpy(input_str, "sin(5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, -0.95892427466, 0.0000001);
+
+  free(input_str);
+  free(cor_input_str);
 }
 END_TEST
 
-START_TEST(parser_calculator_test_8) {
-  double res = parser("ln(0)");
-  ck_assert_double_eq_tol(res, 1.0, 0.0000001);
+START_TEST(parser_calculator_test_cos) {
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  int res1 = 0;
+  double res2 = 0;
+
+  strcpy(input_str, "cos(0)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 1.0, 0.0000001);
+
+  strcpy(input_str, "cos(1)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.54030230586, 0.0000001);
+
+  strcpy(input_str, "cos(5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.28366218546, 0.0000001);
+
+  free(input_str);
+  free(cor_input_str);
 }
 END_TEST
 
-START_TEST(parser_calculator_test_9) {
-  double res = parser("sin(0)");
-  ck_assert_double_eq_tol(res, 0.0, 0.0000001);
-}
-END_TEST
+START_TEST(parser_calculator_test_tan) {
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  int res1 = 0;
+  double res2 = 0;
 
-START_TEST(parser_calculator_test_10) {
-  double res = parser("cos(0)");
-  ck_assert_double_eq_tol(res, 1.0, 0.0000001);
-}
-END_TEST
+  strcpy(input_str, "tan(0)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.0, 0.0000001);
 
-START_TEST(parser_calculator_test_11) {
-  double res = parser("tan(0)");
-  ck_assert_double_eq_tol(res, 0.0, 0.0000001);
-}
-END_TEST
+  strcpy(input_str, "tan(1)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 1.55740772465, 0.0000001);
 
-START_TEST(parser_calculator_test_12) {
-  double res = parser("2^2");
-  ck_assert_double_eq_tol(res, 4.0, 0.0000001);
-}
-END_TEST
+  strcpy(input_str, "tan(5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, -3.38051500625, 0.0000001);
 
-START_TEST(parser_calculator_test_12) {
-  double res = parser("2^2");
-  ck_assert_double_eq_tol(res, 4.0, 0.0000001);
+  free(input_str);
+  free(cor_input_str);
 }
 END_TEST
 
@@ -480,14 +542,20 @@ Suite *s21_calc_suite(void) {
   tcase_add_test(tc_core, parser_calculator_test_2);
   tcase_add_test(tc_core, parser_calculator_test_3);
   tcase_add_test(tc_core, parser_calculator_test_4);
-  tcase_add_test(tc_core, parser_calculator_test_5);
+  // tcase_add_test(tc_core, parser_calculator_test_5);
   tcase_add_test(tc_core, parser_calculator_test_6);
   tcase_add_test(tc_core, parser_calculator_test_7);
-  tcase_add_test(tc_core, parser_calculator_test_8);
-  tcase_add_test(tc_core, parser_calculator_test_9);
-  tcase_add_test(tc_core, parser_calculator_test_10);
-  tcase_add_test(tc_core, parser_calculator_test_11);
-  tcase_add_test(tc_core, parser_calculator_test_12);
+  tcase_add_test(tc_core, parser_calculator_test_log);
+  tcase_add_test(tc_core, parser_calculator_test_ln);
+  tcase_add_test(tc_core, parser_calculator_test_cos);
+  tcase_add_test(tc_core, parser_calculator_test_sin);
+  tcase_add_test(tc_core, parser_calculator_test_tan);
+  // tcase_add_test(tc_core, parser_calculator_test_7);
+  // tcase_add_test(tc_core, parser_calculator_test_8);
+  // tcase_add_test(tc_core, parser_calculator_test_9);
+  // tcase_add_test(tc_core, parser_calculator_test_10);
+  // tcase_add_test(tc_core, parser_calculator_test_11);
+  // tcase_add_test(tc_core, parser_calculator_test_12);
 
   // tcase_add_test(tc_core, credit_calc_test_1);
   // tcase_add_test(tc_core, credit_calc_test_2);

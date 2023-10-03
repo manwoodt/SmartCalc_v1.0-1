@@ -2,11 +2,11 @@ CHECK =  $(shell pkg-config --libs --cflags check)
 #$(shell pkg-config --libs --cflags check) - позволяет получить путь к библиотеке check.h и её заголовочному файлу,  а также её имя 
 CFLAGS = -Wall -Werror -Wextra -std=c11 -g 
 SRCS = $(wildcard *.c)
-EXCLUDE = s21_string_tests.c main.c
+EXCLUDE = calc_tests.c main.c
 SOURCES = $(filter-out $(EXCLUDE), $(SRCS))
 OBJECTS = $(SOURCES:.c=.o)
-TESTS = s21_calc_tests.o
-S21LIB = s21_string.a
+TESTS = calc_tests.o
+S21LIB = s21_calc.a
 # пишет название текущей ОС
 UNAME = $(shell uname -s)
 FLAGS = -lcheck
@@ -36,7 +36,7 @@ $(TESTS): $(TESTS:.o=.c)
 
 
 mytest: 
-	gcc $(CFLAGS) -o calc $(SOURCES)  -lm main.c
+	gcc $(CFLAGS) -o calc $(SOURCES)  -lm 
 
 
 #создание стат. библиотеки	
