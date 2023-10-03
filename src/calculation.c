@@ -1,12 +1,11 @@
 #include "calc.h"
 
 // int main() {
-//   printf("RES : %f\n", acos(0.5));
 //   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
-//   // strcpy(input_str, "3+5");
-//   strcpy(input_str, "atan(0.5)");
+//   strcpy(input_str, "sqrt(4)*2");
+//   // strcpy(input_str, "atan(0.5)");
 //   // strcpy(input_str, "sqrt(100)");
 //   //    strcpy(input_str, "sqrt(100)");
 //   //  strcpy(input_str, "tan(1)");

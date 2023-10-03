@@ -30,7 +30,6 @@ double parser(char *input_str) {
     output_str.char_or_not[output_str.size] = 1;
     output_str.size++;
   }
-
   return calculation(&output_str);
 }
 
@@ -49,6 +48,9 @@ void parser_operation(char *input_str, create_stack *stack,
       while (stack->size != 0 && peek(stack) != '(' && diff_priority <= 0) {
         output_str->operation[output_str->size] = pop(stack);
         output_str->char_or_not[output_str->size] = 1;
+        output_str->priority[output_str->size] =
+            priority(output_str->operation[output_str->size]);
+
         output_str->size++;
         diff_priority =
             priority(input_str[i]) - stack->priority[stack->size - 1];
