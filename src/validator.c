@@ -56,12 +56,13 @@ int how_much_dots(char *input_str, unsigned int i) {
   return count_of_dots;
 }
 
-// cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q
+// cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q, acos - o, asin - i,
+// atan - a
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
                         unsigned int *j) {
   // cos
   if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
-      input_str[*i + 2] == 's') {
+      input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'c';
     *i += 2;
   } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'i' &&
@@ -72,6 +73,21 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
              input_str[*i + 2] == 'n' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 't';
     *i += 2;
+  } else if ((input_str[*i]) == 'a' && input_str[*i + 1] == 'c' &&
+             input_str[*i + 2] == 'o' && input_str[*i + 3] == 's' &&
+             input_str[*i + 4] == '(') {
+    cor_input_str[*j] = 'o';
+    *i += 3;
+  } else if ((input_str[*i]) == 'a' && input_str[*i + 1] == 's' &&
+             input_str[*i + 2] == 'i' && input_str[*i + 3] == 'n' &&
+             input_str[*i + 4] == '(') {
+    cor_input_str[*j] = 'i';
+    *i += 3;
+  } else if ((input_str[*i]) == 'a' && input_str[*i + 1] == 't' &&
+             input_str[*i + 2] == 'a' && input_str[*i + 3] == 'n' &&
+             input_str[*i + 4] == '(') {
+    cor_input_str[*j] = 'a';
+    *i += 3;
   } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'o' &&
              input_str[*i + 2] == 'g' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'l';
@@ -82,7 +98,7 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
     *i += 1;
   } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'q' &&
              input_str[*i + 2] == 'r' && input_str[*i + 3] == 't' &&
-             input_str[*i + 3] == '(') {
+             input_str[*i + 4] == '(') {
     cor_input_str[*j] = 'q';
     *i += 3;
   } else {

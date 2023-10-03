@@ -23,7 +23,8 @@ int is_number(int operation) {
 
 int is_trigonometry(int operation) {
   return (operation == 'c' || operation == 's' || operation == 't' ||
-          operation == 'l' || operation == 'a' || operation == 'n')
+          operation == 'q' || operation == 'l' || operation == 'a' ||
+          operation == 'i' || operation == 'o' || operation == 'n')
              ? 1
              : 0;
 }
@@ -57,6 +58,9 @@ int priority(int operation) {
     case 'q':
     case 'l':
     case 'n':
+    case 'o':
+    case 'i':
+    case 'a':
       priority = 4;
       break;
     case ')':

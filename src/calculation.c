@@ -1,12 +1,13 @@
 #include "calc.h"
 
 // int main() {
+//   printf("RES : %f\n", acos(0.5));
 //   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
 //   // strcpy(input_str, "3+5");
-//   // strcpy(input_str, "acos1");
-//   strcpy(input_str, "log(100.1)");
+//   strcpy(input_str, "atan(0.5)");
+//   // strcpy(input_str, "sqrt(100)");
 //   //    strcpy(input_str, "sqrt(100)");
 //   //  strcpy(input_str, "tan(1)");
 
@@ -67,6 +68,15 @@ void calculation_math_func_operation(create_stack *output_str,
       break;
     case 't':
       push(stack_res, tan(num1));
+      break;
+    case 'o':
+      push(stack_res, acos(num1));
+      break;
+    case 'i':
+      push(stack_res, asin(num1));
+      break;
+    case 'a':
+      push(stack_res, atan(num1));
       break;
     case 'l':
       push(stack_res, log10(num1));
