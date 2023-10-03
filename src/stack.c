@@ -41,6 +41,7 @@ void nulldata(create_stack *stack) {
   stack->data[stack->size] = 0;
   stack->priority[stack->size] = 0;
 }
+
 /*
 void printStack(create_stack stack) {
   printf("stack size: %ld\n", stack.size);

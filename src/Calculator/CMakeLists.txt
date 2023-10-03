@@ -21,7 +21,10 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        ../calc.c
+        ../calculation.c
+        ../extra_func.c
+        ../parser.c
+        ../validator.c
         ../stack.c
         ../calc.h
         ${TS_FILES}

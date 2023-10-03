@@ -46,4 +46,12 @@ void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, long unsigned int i);
 
 double calculation(create_stack *output_str);
+void calculation_operation(create_stack *output_str, create_stack *stack_res,
+                           unsigned int i);
+void calculation_basic_operation(create_stack *output_str,
+                                 create_stack *stack_res, unsigned int i,
+                                 double num1);
+void calculation_math_func_operation(create_stack *output_str,
+                                     create_stack *stack_res, unsigned int i,
+                                     double num1);
 #endif /*S21_STRING_H*/

@@ -10,7 +10,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="143"/>
-        <source>÷</source>
+        <source>/</source>
+        <oldsource>÷</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
