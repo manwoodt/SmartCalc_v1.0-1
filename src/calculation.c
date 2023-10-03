@@ -6,7 +6,7 @@
 //   // scanf("%s", input_str);
 //   // strcpy(input_str, "3+5");
 //   // strcpy(input_str, "acos1");
-//   strcpy(input_str, "cos(100.1)");
+//   strcpy(input_str, "log(100.1)");
 //   //    strcpy(input_str, "sqrt(100)");
 //   //  strcpy(input_str, "tan(1)");
 

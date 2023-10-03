@@ -61,40 +61,24 @@ void parser_operation(char *input_str, create_stack *stack,
   }
 }
 
-// void parser_operand(const char *input_str, create_stack *output_str,
-//                     long unsigned int *i) {
-//   char *lex_num = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
-//   int lex_num_index = 0;
-//   lex_num[lex_num_index] = input_str[*i];
-//   lex_num_index++;
-//   // смотрим следующее символ - цифра, если да, добавляем в массив числа
-//   while (is_number(input_str[*i + 1]) ||) {
-//     (*i)++;
-//     lex_num[lex_num_index] = input_str[*i];
-//     lex_num_index++;
-//   }
-//   output_str->data[output_str->size] = atoi(lex_num);
-//   output_str->size++;
-//   free(lex_num);
-// }
-
 void parser_operand(const char *input_str, create_stack *output_str,
                     unsigned int *i) {
   char *num_in_arr = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
-  number_w_dot(input_str, num_in_arr, i);
+  number_w_dot(input_str, num_in_arr, *i);
+  *i += (strlen(num_in_arr) - 1);
   output_str->data[output_str->size] = atof(num_in_arr);
   output_str->size++;
   free(num_in_arr);
 }
 
-void number_w_dot(const char *input_str, char *num_in_arr, unsigned int *i) {
+void number_w_dot(const char *input_str, char *num_in_arr, unsigned int i) {
   int lex_num_index = 0;
-  num_in_arr[lex_num_index] = input_str[*i];
+  num_in_arr[lex_num_index] = input_str[i];
   lex_num_index++;
   // смотрим следующее символ - цифра, если да, добавляем в массив числа
-  while (is_number(input_str[*i + 1]) || input_str[*i + 1] == '.') {
-    (*i)++;
-    num_in_arr[lex_num_index] = input_str[*i];
+  while (is_number(input_str[i + 1]) || input_str[i + 1] == '.') {
+    i++;
+    num_in_arr[lex_num_index] = input_str[i];
     lex_num_index++;
   }
 }

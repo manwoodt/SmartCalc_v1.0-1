@@ -32,8 +32,8 @@ int priority(int operation);
 int validator(char *input_str, char *cor_input_str);
 int garbage_for_validator(int operation);
 
-void number_w_dot(const char *input_str, char *num_in_arr, unsigned int *i);
-int how_much_dots(char *input_str, unsigned int *i);
+void number_w_dot(const char *input_str, char *num_in_arr, unsigned int i);
+int how_much_dots(char *input_str, unsigned int i);
 
 int is_operation(int operation);
 int is_number(int operation);

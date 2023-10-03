@@ -32,10 +32,9 @@ int validator(char *input_str, char *cor_input_str) {
       j++;
     }
     // точки
-    unsigned int k = i;
     if (is_number(input_str[i])) {
       number_flag = 1;
-      if (how_much_dots(input_str, &k) > 1) correct = 0;
+      if (how_much_dots(input_str, i) > 1) correct = 0;
     }
   }
 
@@ -46,7 +45,7 @@ int validator(char *input_str, char *cor_input_str) {
   return correct;
 }
 
-int how_much_dots(char *input_str, unsigned int *i) {
+int how_much_dots(char *input_str, unsigned int i) {
   int count_of_dots = 0;
   char *num_in_arr = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   number_w_dot(input_str, num_in_arr, i);
