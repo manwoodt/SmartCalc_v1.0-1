@@ -18,12 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_8, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_9, SIGNAL(clicked()), this,SLOT(digits_numbers()));
 
-    connect(ui->pushButton_cos, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_sin, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_tan, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_acos, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_asin, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_atan, SIGNAL(clicked()), this,SLOT(digits_numbers()));
+    connect(ui->pushButton_cos, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_sin, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_tan, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_acos, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_asin, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_atan, SIGNAL(clicked()), this,SLOT(math_func()));
 
     connect(ui->pushButton_x, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_leftBracket, SIGNAL(clicked()), this,SLOT(digits_numbers()));
@@ -35,9 +35,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_unar_minus, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_deg, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_mod, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_log, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_ln, SIGNAL(clicked()), this,SLOT(digits_numbers()));
-    connect(ui->pushButton_sqrt, SIGNAL(clicked()), this,SLOT(digits_numbers()));
+
+    connect(ui->pushButton_log, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_ln, SIGNAL(clicked()), this,SLOT(math_func()));
+    connect(ui->pushButton_sqrt, SIGNAL(clicked()), this,SLOT(math_func()));
     connect(ui->pushButton_dot, SIGNAL(clicked()), this,SLOT(digits_numbers()));
 
     connect(ui->pushButton_C, SIGNAL(clicked()), this,SLOT(delete_all_text()));
@@ -57,6 +58,12 @@ MainWindow::~MainWindow()
     ui->result->setText(ui->result->text() + button->text());
 }
 
+  void MainWindow::math_func(){
+    QPushButton *button = (QPushButton *) sender();
+    ui->result->setText(ui->result->text() + button->text() + "(");
+}
+
+
   void MainWindow::delete_all_text(){
     ui->result->setText("");
 }
@@ -72,8 +79,6 @@ MainWindow::~MainWindow()
       double res_num = 0;
 
       if (is_correct){
-         ui->result->setText("ok");
-
          res_num = parser(changed_input_expr);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);

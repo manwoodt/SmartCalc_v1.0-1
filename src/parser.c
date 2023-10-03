@@ -4,8 +4,6 @@ double parser(char *input_str) {
   create_stack output_str = {0};
   create_stack stack = {0};
   for (long unsigned int i = 0; i < strlen(input_str); i++) {
-    // while (input_str[i] == ' ') i++;
-
     if (input_str[i] == '(') {
       push(&stack, input_str[i]);
     }

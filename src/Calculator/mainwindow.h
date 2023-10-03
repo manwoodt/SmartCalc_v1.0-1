@@ -23,6 +23,7 @@ private:
     Ui::MainWindow *ui;
 private slots:
     void digits_numbers();
+    void math_func();
     void delete_all_text();
     void backspace();
     void equal();
