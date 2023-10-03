@@ -3,7 +3,7 @@
 double parser(char *input_str) {
   create_stack output_str = {0};
   create_stack stack = {0};
-  for (long unsigned int i = 0; i < strlen(input_str); i++) {
+  for (unsigned int i = 0; i < strlen(input_str); i++) {
     if (input_str[i] == '(') {
       push(&stack, input_str[i]);
     }
@@ -35,7 +35,7 @@ double parser(char *input_str) {
 }
 
 void parser_operation(char *input_str, create_stack *stack,
-                      create_stack *output_str, long unsigned int i) {
+                      create_stack *output_str, unsigned int i) {
   if (stack->size == 0) {
     push(stack, input_str[i]);
   } else {
@@ -61,20 +61,40 @@ void parser_operation(char *input_str, create_stack *stack,
   }
 }
 
+// void parser_operand(const char *input_str, create_stack *output_str,
+//                     long unsigned int *i) {
+//   char *lex_num = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+//   int lex_num_index = 0;
+//   lex_num[lex_num_index] = input_str[*i];
+//   lex_num_index++;
+//   // смотрим следующее символ - цифра, если да, добавляем в массив числа
+//   while (is_number(input_str[*i + 1]) ||) {
+//     (*i)++;
+//     lex_num[lex_num_index] = input_str[*i];
+//     lex_num_index++;
+//   }
+//   output_str->data[output_str->size] = atoi(lex_num);
+//   output_str->size++;
+//   free(lex_num);
+// }
+
 void parser_operand(const char *input_str, create_stack *output_str,
-                    long unsigned int *i) {
-  char *lex_num = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+                    unsigned int *i) {
+  char *num_in_arr = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  number_w_dot(input_str, num_in_arr, i);
+  output_str->data[output_str->size] = atof(num_in_arr);
+  output_str->size++;
+  free(num_in_arr);
+}
+
+void number_w_dot(const char *input_str, char *num_in_arr, unsigned int *i) {
   int lex_num_index = 0;
-  lex_num[lex_num_index] = input_str[*i];
+  num_in_arr[lex_num_index] = input_str[*i];
   lex_num_index++;
   // смотрим следующее символ - цифра, если да, добавляем в массив числа
-  while (input_str[*i + 1] >= '0' && input_str[*i + 1] <= '9') {
+  while (is_number(input_str[*i + 1]) || input_str[*i + 1] == '.') {
     (*i)++;
-    lex_num[lex_num_index] = input_str[*i];
+    num_in_arr[lex_num_index] = input_str[*i];
     lex_num_index++;
   }
-  output_str->data[output_str->size] = atoi(lex_num);
-  output_str->size++;
-  memset(lex_num, '0', strlen(lex_num));
-  free(lex_num);
 }

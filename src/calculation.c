@@ -5,8 +5,8 @@
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
 //   // strcpy(input_str, "3+5");
-//   //strcpy(input_str, "acos1");
-//    strcpy(input_str, "ln(100)");
+//   // strcpy(input_str, "acos1");
+//   strcpy(input_str, "cos(100.1)");
 //   //    strcpy(input_str, "sqrt(100)");
 //   //  strcpy(input_str, "tan(1)");
 

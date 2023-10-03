@@ -21,16 +21,21 @@ int validator(char *input_str, char *cor_input_str) {
     // пустые скобки
     if (input_str[i] == '(' && input_str[i + 1] == ')') correct = 0;
     if (is_right_bracket > is_left_bracket) correct = 0;
-    if (is_number(input_str[i])) number_flag = 1;
     if ((input_str[i]) == ' ') correct = 0;
 
-    // cos...
+    // мат функции
     res = is_trigonometry(input_str[i]);
     if (res) {
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
     } else {
       cor_input_str[j] = input_str[i];
       j++;
+    }
+    // точки
+    unsigned int k = i;
+    if (is_number(input_str[i])) {
+      number_flag = 1;
+      if (how_much_dots(input_str, &k) > 1) correct = 0;
     }
   }
 
@@ -39,6 +44,17 @@ int validator(char *input_str, char *cor_input_str) {
 
   if (!number_flag) correct = 0;
   return correct;
+}
+
+int how_much_dots(char *input_str, unsigned int *i) {
+  int count_of_dots = 0;
+  char *num_in_arr = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  number_w_dot(input_str, num_in_arr, i);
+  for (unsigned int k = 0; k < strlen(num_in_arr); k++) {
+    if (num_in_arr[k] == '.') count_of_dots++;
+  }
+  free(num_in_arr);
+  return count_of_dots;
 }
 
 // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q

@@ -1,13 +1,21 @@
 #include <check.h>
 
 #include "calc.h"
-/*
+
 START_TEST(validator_test_1) {
-  int res = validator("((ln(1)-1^5+5*5mod2/5-sin(5)^ln(5)))");
-  ck_assert_int_eq(res, OK);
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  int res1 = 0;
+
+  strcpy(input_str, "5.5.5-1");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 0);
+
+  free(input_str);
+  free(cor_input_str);
 }
 END_TEST
-
+/*
 START_TEST(validator_test_2) {
   int res = validator("5+5*5/5-sin(5)^ln(5)+log(10)-acos(3)-atan(7)+tan(3)",
                       "4.7", 0);
@@ -180,8 +188,8 @@ END_TEST
 */
 
 START_TEST(parser_calculator_test_1) {
-  double res = parser("2+2");
-  ck_assert_double_eq_tol(res, 4.0, 0.0000001);
+  double res = parser("222+222");
+  ck_assert_double_eq_tol(res, 444.0, 0.0000001);
 }
 END_TEST
 
@@ -221,12 +229,18 @@ START_TEST(parser_calculator_test_7) {
 }
 END_TEST
 
+START_TEST(parser_calculator_test_8) {
+  double res = parser("2.2+1");
+  ck_assert_double_eq_tol(res, 3.2, 0.0000001);
+}
+END_TEST
+
 START_TEST(parser_calculator_test_log) {
   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   int res1 = 0;
   double res2 = 0;
-  
+
   strcpy(input_str, "log(10)");
   res1 = validator(input_str, cor_input_str);
   ck_assert_int_eq(res1, 1);
@@ -513,7 +527,7 @@ Suite *s21_calc_suite(void) {
   s = suite_create("s21_calc");
   tc_core = tcase_create("Core");
   suite_add_tcase(s, tc_core);
-  // tcase_add_test(tc_core, validator_test_1);
+  tcase_add_test(tc_core, validator_test_1);
   // tcase_add_test(tc_core, validator_test_2);
   // tcase_add_test(tc_core, validator_test_3);
   // tcase_add_test(tc_core, validator_test_4);
@@ -545,6 +559,7 @@ Suite *s21_calc_suite(void) {
   // tcase_add_test(tc_core, parser_calculator_test_5);
   tcase_add_test(tc_core, parser_calculator_test_6);
   tcase_add_test(tc_core, parser_calculator_test_7);
+  tcase_add_test(tc_core, parser_calculator_test_8);
   tcase_add_test(tc_core, parser_calculator_test_log);
   tcase_add_test(tc_core, parser_calculator_test_ln);
   tcase_add_test(tc_core, parser_calculator_test_cos);
