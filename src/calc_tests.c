@@ -194,8 +194,8 @@ START_TEST(parser_calculator_test_1) {
 END_TEST
 
 START_TEST(parser_calculator_test_2) {
-  double res = parser("2-2");
-  ck_assert_double_eq_tol(res, 0.0, 0.0000001);
+  double res = parser("24-42");
+  ck_assert_double_eq_tol(res, -18.0, 0.0000001);
 }
 END_TEST
 
@@ -211,11 +211,11 @@ START_TEST(parser_calculator_test_4) {
 }
 END_TEST
 
-// START_TEST(parser_calculator_test_5) {
-//   double res = parser("21%4");
-//   ck_assert_double_eq_tol(res, 1.0, 0.0000001);
-// }
-// END_TEST
+START_TEST(parser_calculator_test_5) {
+  double res = parser("21%4");
+  ck_assert_double_eq_tol(res, 1.0, 0.0000001);
+}
+END_TEST
 
 START_TEST(parser_calculator_test_6) {
   double res = parser("2^2");
@@ -320,6 +320,12 @@ START_TEST(parser_calculator_test_sin) {
   res2 = parser(cor_input_str);
   ck_assert_double_eq_tol(res2, -0.95892427466, 0.0000001);
 
+  strcpy(input_str, "sin(0.5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.4794255386, 0.0000001);
+
   free(input_str);
   free(cor_input_str);
 }
@@ -349,6 +355,12 @@ START_TEST(parser_calculator_test_cos) {
   res2 = parser(cor_input_str);
   ck_assert_double_eq_tol(res2, 0.28366218546, 0.0000001);
 
+  strcpy(input_str, "cos(0.5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.87758256189, 0.0000001);
+
   free(input_str);
   free(cor_input_str);
 }
@@ -377,6 +389,12 @@ START_TEST(parser_calculator_test_tan) {
   ck_assert_int_eq(res1, 1);
   res2 = parser(cor_input_str);
   ck_assert_double_eq_tol(res2, -3.38051500625, 0.0000001);
+
+  strcpy(input_str, "tan(0.5)");
+  res1 = validator(input_str, cor_input_str);
+  ck_assert_int_eq(res1, 1);
+  res2 = parser(cor_input_str);
+  ck_assert_double_eq_tol(res2, 0.54630248984, 0.0000001);
 
   free(input_str);
   free(cor_input_str);
@@ -556,7 +574,7 @@ Suite *s21_calc_suite(void) {
   tcase_add_test(tc_core, parser_calculator_test_2);
   tcase_add_test(tc_core, parser_calculator_test_3);
   tcase_add_test(tc_core, parser_calculator_test_4);
-  // tcase_add_test(tc_core, parser_calculator_test_5);
+  tcase_add_test(tc_core, parser_calculator_test_5);
   tcase_add_test(tc_core, parser_calculator_test_6);
   tcase_add_test(tc_core, parser_calculator_test_7);
   tcase_add_test(tc_core, parser_calculator_test_8);
