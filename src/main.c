@@ -1,32 +1,32 @@
 #include "calc.h"
 
-int main() {
-  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
-  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
-  // scanf("%s", input_str);
-  // strcpy(input_str, "3+5");
-  strcpy(input_str, "acos1");
-  // strcpy(input_str, "log10");
-  //    strcpy(input_str, "sqrt(100)");
-  //  strcpy(input_str, "tan(1)");
+// int main() {
+//   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+//   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+//   // scanf("%s", input_str);
+//   // strcpy(input_str, "3+5");
+//   //strcpy(input_str, "acos1");
+//   // strcpy(input_str, "log10");
+//   //    strcpy(input_str, "sqrt(100)");
+//   //  strcpy(input_str, "tan(1)");
 
-  // strcpy(input_str, "(42*((43+3-4)/23))^2");
-  //  strcpy(input_str, "(43+43-5)/9");
-  printf("BEF: %s\n", input_str);
-  if (validator(input_str, cor_input_str)) {
-    printf("AFT: %s\n", cor_input_str);
-    double res = parser(cor_input_str);
-    // printf("Output_str\n");
-    // printStack(output_str);
-    printf("res: %f\n", res);
-  } else
-    printf("ERROR\n");
+//   // strcpy(input_str, "(42*((43+3-4)/23))^2");
+//   //  strcpy(input_str, "(43+43-5)/9");
+//   printf("BEF: %s\n", input_str);
+//   if (validator(input_str, cor_input_str)) {
+//     printf("AFT: %s\n", cor_input_str);
+//     double res = parser(cor_input_str);
+//     // printf("Output_str\n");
+//     // printStack(output_str);
+//     printf("res: %f\n", res);
+//   } else
+//     printf("ERROR\n");
 
-  free(input_str);
-  free(cor_input_str);
+//   free(input_str);
+//   free(cor_input_str);
 
-  return 0;
-}
+//   return 0;
+// }
 
 int validator(char *input_str, char *cor_input_str) {
   int correct = 1;
@@ -69,7 +69,7 @@ int validator(char *input_str, char *cor_input_str) {
   return correct;
 }
 
-// cos - c, sin - s, tg - t, ctg - g, log - l, ln - n, sqrt - q
+// cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
                         unsigned int *j) {
   // cos
@@ -86,11 +86,11 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
     cor_input_str[*j] = 't';
     *i += 2;
   } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'o' &&
-             input_str[*i + 2] == 'g' && is_number(input_str[*i + 3])) {
+             input_str[*i + 2] == 'g' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'l';
     *i += 2;
   } else if ((input_str[*i]) == 'l' && input_str[*i + 1] == 'n' &&
-             is_number(input_str[*i + 2])) {
+             input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'g';
     *i += 1;
   } else if ((input_str[*i]) == 's' && input_str[*i + 1] == 'q' &&
@@ -126,7 +126,7 @@ double parser(char *input_str) {
     if (is_number(input_str[i])) {
       parser_operand(input_str, &output_str, &i);
       // операции
-    } else if (isoperation(input_str[i])) {
+    } else if (is_operation(input_str[i])) {
       parser_operation(input_str, &stack, &output_str, i);
     }
   }
@@ -300,7 +300,7 @@ double calculation(create_stack *output_str) {
   return peek(&stack_res);
 }
 
-int isoperation(int operation) {
+int is_operation(int operation) {
   if (operation == '+' || operation == '-' || operation == '*' ||
       operation == '/' || operation == '^' || is_trigonometry(operation))
     return 1;
@@ -309,9 +309,8 @@ int isoperation(int operation) {
 }
 
 int garbage_for_validator(int operation) {
-  if (operation == '+' || operation == '-' || operation == '*' ||
-      operation == '/' || operation == '^' || operation == '(' ||
-      operation == ')' || is_number(operation) || is_trigonometry(operation))
+  if (is_operation(operation) || operation == '(' || operation == ')' ||
+      is_number(operation) || is_trigonometry(operation))
     return 0;
   else
     return 1;
@@ -322,10 +321,17 @@ int is_number(int operation) {
 }
 
 int is_trigonometry(int operation) {
-  return (operation == 'c' || operation == 'o' || operation == 's' ||
-          operation == 'i' || operation == 'n' || operation == 't' ||
-          operation == 'g' || operation == 'l' || operation == 'q' ||
-          operation == 'r' || operation == 'a')
+  return (operation == 'c' || operation == 's' || operation == 't' ||
+          operation == 'l' || operation == 'a')
              ? 1
              : 0;
 }
+
+// int is_trigonometry(int operation) {
+//   return (operation == 'c' || operation == 'o' || operation == 's' ||
+//           operation == 'i' || operation == 'n' || operation == 't' ||
+//           operation == 'g' || operation == 'l' || operation == 'q' ||
+//           operation == 'r' || operation == 'a')
+//              ? 1
+//              : 0;
+// }

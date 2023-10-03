@@ -29,12 +29,13 @@ double pop(create_stack *stack);
 double peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
-int isoperation(int operation);
 int validator(char *input_str, char *cor_input_str);
 int garbage_for_validator(int operation);
 
+int is_operation(int operation);
 int is_number(int operation);
 int is_trigonometry(int operation);
+
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
                         unsigned int *j);
 
