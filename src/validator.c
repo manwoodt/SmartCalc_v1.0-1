@@ -1,13 +1,16 @@
 #include "calc.h"
 
-int validator(char *input_str, char *cor_input_str) {
+int validator(char *input_str, char *cor_input_str, int is_there_x_value,
+              char *ch_x_value) {
   int correct = 1;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
   int number_flag = 0;
   int res = 0;
+  int is_there_x = 0;
   int unar_minus[255] = {0};
   int unar_plus[255] = {0};
+
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
@@ -29,6 +32,9 @@ int validator(char *input_str, char *cor_input_str) {
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
 
+    if ((is_there_x && !is_there_x_value) || (is_there_x && !is_there_x_value))
+      correct = 0;
+
     res = is_trigonometry(input_str[i]);
     if (res) {
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
@@ -49,10 +55,12 @@ int validator(char *input_str, char *cor_input_str) {
       number_flag = 1;
       if (how_much_dots(input_str, i) > 1) correct = 0;
     }
+    if ((input_str[i]) == 'x') is_there_x = 1;
   }
+  // x
+
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 0;
-
   if (!number_flag) correct = 0;
   return correct;
 }

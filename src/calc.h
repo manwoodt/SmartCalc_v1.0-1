@@ -29,7 +29,8 @@ double pop(create_stack *stack);
 double peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
-int validator(char *input_str, char *cor_input_str);
+int validator(char *input_str, char *cor_input_str, int is_there_x_value,
+              char *ch_x_value);
 int garbage_for_validator(int operation);
 
 void number_w_dot(const char *input_str, char *num_in_arr, unsigned int i);
