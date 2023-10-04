@@ -6,6 +6,8 @@ int validator(char *input_str, char *cor_input_str) {
   int is_right_bracket = 0;
   int number_flag = 0;
   int res = 0;
+  int unar_minus[255] = {0};
+  int unar_plus[255] = {0};
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
@@ -23,13 +25,24 @@ int validator(char *input_str, char *cor_input_str) {
     if (is_right_bracket > is_left_bracket) correct = 0;
     if ((input_str[i]) == ' ') correct = 0;
 
-    // мат функции
+    // унарность
+    unary(input_str, '+', unar_plus, i, &correct);
+    unary(input_str, '-', unar_minus, i, &correct);
+
     res = is_trigonometry(input_str[i]);
     if (res) {
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
     } else {
-      cor_input_str[j] = input_str[i];
-      j++;
+      if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
+        i++;
+      }
+      if (unar_minus[i]) {
+        cor_input_str[j] = '~';
+        j++;
+      } else {
+        cor_input_str[j] = input_str[i];
+        j++;
+      }
     }
     // точки
     if (is_number(input_str[i])) {
@@ -37,12 +50,20 @@ int validator(char *input_str, char *cor_input_str) {
       if (how_much_dots(input_str, i) > 1) correct = 0;
     }
   }
-
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 0;
 
   if (!number_flag) correct = 0;
   return correct;
+}
+
+void unary(char *input_str, char znak, int *array, unsigned int i,
+           int *correct) {
+  if (input_str[0] == znak) array[0] = 1;
+  if (is_operation(input_str[i]) && input_str[i + 1] == znak) array[i + 1] = 1;
+  if (input_str[i] == '(' && input_str[i + 1] == znak) array[i + 1] = 1;
+  if (input_str[i] == znak && input_str[i + 1] == '(') array[i] = 1;
+  if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 0;
 }
 
 int how_much_dots(char *input_str, unsigned int i) {

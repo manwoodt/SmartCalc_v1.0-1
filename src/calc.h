@@ -41,6 +41,8 @@ int is_trigonometry(int operation);
 
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
                         unsigned int *j);
+void unary(char *input_str, char znak, int *array, unsigned int i,
+           int *correct);
 
 double parser(char *input_str);
 void parser_operand(const char *input_str, create_stack *output_str,

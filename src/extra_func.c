@@ -1,9 +1,9 @@
 #include "calc.h"
 
 int is_operation(int operation) {
-  if (operation == '+' || operation == '-' || operation == '*' ||
-      operation == '%' || operation == '/' || operation == '^' ||
-      is_trigonometry(operation))
+  if (operation == '+' || operation == '-' || operation == '~' ||
+      operation == '*' || operation == '%' || operation == '/' ||
+      operation == '^' || is_trigonometry(operation))
     return 1;
   else
     return 0;
@@ -63,11 +63,14 @@ int priority(int operation) {
     case 'a':
       priority = 4;
       break;
-    case ')':
+    case '~':
       priority = 5;
       break;
-    case '(':
+    case ')':
       priority = 6;
+      break;
+    case '(':
+      priority = 7;
       break;
     // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q
     default:

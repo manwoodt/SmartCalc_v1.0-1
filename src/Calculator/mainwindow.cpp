@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_asin, SIGNAL(clicked()), this,SLOT(math_func()));
     connect(ui->pushButton_atan, SIGNAL(clicked()), this,SLOT(math_func()));
 
-    connect(ui->pushButton_x, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_leftBracket, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_rightBracket, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_minus, SIGNAL(clicked()), this,SLOT(digits_numbers()));
@@ -45,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
 
     connect(ui->pushButton_equal, SIGNAL(clicked()), this,SLOT(equal()));
+    //connect(ui->insert_x, SIGNAL(returnPressed()), this, SLOT(equal()));
 }
 
 MainWindow::~MainWindow()
@@ -70,10 +70,10 @@ MainWindow::~MainWindow()
 
   void MainWindow::equal(){
       QByteArray expression = ui->result->text().toLocal8Bit();
-    //  QByteArray x_value = ui->insert_x->text().toLocal8Bit();
+      QByteArray x_value = ui->insert_x->text().toLocal8Bit();
       char *input_expr = expression.data();
       char changed_input_expr [255]{0};
-     // char *input_x = x_value.data();
+      char *input_x = x_value.data();
       int x_for_graph = 0;
       int is_correct = validator(input_expr, changed_input_expr);
       double res_num = 0;

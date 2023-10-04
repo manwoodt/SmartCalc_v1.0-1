@@ -175,22 +175,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1127"/>
-        <source>X =</source>
+        <location filename="mainwindow.ui" line="1218"/>
+        <source>Insert X:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1159"/>
+        <location filename="mainwindow.ui" line="1127"/>
         <source>graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1191"/>
+        <location filename="mainwindow.ui" line="1159"/>
         <source>credit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1223"/>
+        <location filename="mainwindow.ui" line="1191"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>

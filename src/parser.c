@@ -10,6 +10,7 @@ double parser(char *input_str) {
     if (input_str[i] == ')') {
       while (peek(&stack) != '(') {
         output_str.operation[output_str.size] = pop(&stack);
+        output_str.priority[output_str.size] = stack.priority[stack.size];
         output_str.char_or_not[output_str.size] = 1;
         output_str.size++;
       }
