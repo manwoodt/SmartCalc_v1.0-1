@@ -41,7 +41,7 @@ int is_number(int operation);
 int is_trigonometry(int operation);
 
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
-                        unsigned int *j);
+                        unsigned int *j, char *ch_x_value);
 void unary(char *input_str, char znak, int *array, unsigned int i,
            int *correct);
 

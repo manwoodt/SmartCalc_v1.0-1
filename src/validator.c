@@ -31,13 +31,15 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     // унарность
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
+    // x
+    if ((input_str[i]) == 'x') is_there_x = 1;
 
-    if ((is_there_x && !is_there_x_value) || (is_there_x && !is_there_x_value))
-      correct = 0;
-
+    // переименовать функции на мат. функции
     res = is_trigonometry(input_str[i]);
+    if (input_str[i] == 'x') res = 1;
     if (res) {
-      if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
+      if (trigonometry_change(input_str, cor_input_str, &i, &j, ch_x_value))
+        correct = 0;
     } else {
       if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
         i++;
@@ -55,10 +57,10 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
       number_flag = 1;
       if (how_much_dots(input_str, i) > 1) correct = 0;
     }
-    if ((input_str[i]) == 'x') is_there_x = 1;
   }
-  // x
 
+  if ((is_there_x && !is_there_x_value) || (is_there_x && !is_there_x_value))
+    correct = 0;
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 0;
   if (!number_flag) correct = 0;
@@ -88,8 +90,9 @@ int how_much_dots(char *input_str, unsigned int i) {
 // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q, acos - o, asin - i,
 // atan - a
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
-                        unsigned int *j) {
+                        unsigned int *j, char *ch_x_value) {
   // cos
+  int length = 0;
   if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
       input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'c';
@@ -130,6 +133,12 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
              input_str[*i + 4] == '(') {
     cor_input_str[*j] = 'q';
     *i += 3;
+  } else if (input_str[*i] == 'x') {
+    strcat(cor_input_str, ch_x_value);
+    printf("STR:%s\n", cor_input_str);
+    length = strlen(ch_x_value);
+    *i += length;
+    *j += length;
   } else {
     return 1;
   }

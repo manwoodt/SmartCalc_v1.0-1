@@ -11,8 +11,8 @@ int is_operation(int operation) {
 
 int garbage_for_validator(int operation) {
   if (is_operation(operation) || operation == '(' || operation == '.' ||
-      operation == 'x' || operation == ')' || is_number(operation) ||
-      is_trigonometry(operation))
+      operation == ')' || is_number(operation) || is_trigonometry(operation) ||
+      operation == 'x')
     return 0;
   else
     return 1;
