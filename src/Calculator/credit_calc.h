@@ -24,6 +24,10 @@ signals:
 
 private:
     Ui::Credit_calc *ui;
+
+private slots:
+ void back();
+// void equal();
 };
 
 #endif // CREDIT_CALC_H

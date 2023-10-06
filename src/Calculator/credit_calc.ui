@@ -86,7 +86,7 @@ QPushButton:pressed {
      <string>Рассчитать</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_back">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -161,7 +161,7 @@ QPushButton:pressed {
      <string>Переплата по кредиту, руб. :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="lineEdit_overpayment">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -183,7 +183,7 @@ QPushButton:pressed {
      <string>0.0</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
+   <widget class="QLineEdit" name="lineEdit_totalPayment">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -220,7 +220,7 @@ QPushButton:pressed {
      <string>Ежемесячный платеж, руб. :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="lineEdit_monthlyPayment">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -313,7 +313,7 @@ QPushButton:pressed {
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="lineEdit_loanAmount">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -335,7 +335,7 @@ QPushButton:pressed {
      <string>0.0</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="lineEdit_term">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -412,7 +412,7 @@ QPushButton:pressed {
      </property>
     </item>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="lineEdit_interestRate">
     <property name="geometry">
      <rect>
       <x>160</x>

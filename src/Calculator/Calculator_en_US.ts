@@ -97,8 +97,82 @@
 <context>
     <name>Deposit_calc</name>
     <message>
-        <location filename="deposit_calc.ui" line="16"/>
+        <location filename="deposit_calc.ui" line="14"/>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="53"/>
+        <location filename="deposit_calc.ui" line="238"/>
+        <location filename="deposit_calc.ui" line="259"/>
+        <location filename="deposit_calc.ui" line="297"/>
+        <source>0.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="75"/>
+        <location filename="deposit_calc.ui" line="152"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="91"/>
+        <source>Срок размещения :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="107"/>
+        <source>Сумма вклада, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="124"/>
+        <source>лет/год</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="129"/>
+        <source>месяцев</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="168"/>
+        <source>Процентная ставка, % :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="200"/>
+        <source>Сумма на вкладе в конце, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="216"/>
+        <source>Сумма налога, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="275"/>
+        <source>Начисленные проценты, % :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="329"/>
+        <source>Капитализация</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="372"/>
+        <source>Рассчитать</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="399"/>
+        <source>Назад</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="423"/>
+        <source>Депозитный калькулятор</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

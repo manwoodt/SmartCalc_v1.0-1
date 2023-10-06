@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDoubleValidator>
+
 extern "C"{
 #include "../calc.h"
 }
