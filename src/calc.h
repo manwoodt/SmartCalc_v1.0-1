@@ -33,6 +33,8 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
               char *ch_x_value);
 int garbage_for_validator(int operation);
 
+int is_good_expression(char *expression);
+
 void number_w_dot(const char *input_str, char *num_in_arr, unsigned int i);
 int how_much_dots(char *input_str, unsigned int i);
 

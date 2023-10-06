@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
-<context>
-    <name>Credit_calc</name>
-    <message>
-        <location filename="credit_calc.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Deposit_calc</name>
-    <message>
-        <location filename="deposit_calc.ui" line="16"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
+<TS version="2.1" language="en_GB">
 <context>
     <name>MainWindow</name>
     <message>
@@ -25,9 +9,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="143"/>
-        <source>/</source>
-        <oldsource>÷</oldsource>
+        <location filename="mainwindow.ui" line="79"/>
+        <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -36,8 +19,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="79"/>
-        <source>C</source>
+        <location filename="mainwindow.ui" line="143"/>
+        <source>÷</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -87,7 +70,6 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="474"/>
-        <location filename="mainwindow.ui" line="1221"/>
         <source>=</source>
         <translation type="unfinished"></translation>
     </message>
@@ -183,31 +165,32 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1063"/>
-        <source>x</source>
-        <oldsource>X</oldsource>
+        <source>+/-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1095"/>
-        <source>graph</source>
+        <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1127"/>
-        <source>credit</source>
+        <source>X =</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1159"/>
-        <source>deposit</source>
+        <source>graph</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>plot</name>
     <message>
-        <location filename="plot.ui" line="16"/>
-        <source>Form</source>
+        <location filename="mainwindow.ui" line="1191"/>
+        <source>credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1223"/>
+        <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

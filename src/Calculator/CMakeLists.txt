@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
+
         mainwindow.ui
         ../calculation.c
         ../extra_func.c
@@ -27,6 +28,15 @@ set(PROJECT_SOURCES
         ../validator.c
         ../stack.c
         ../calc.h
+        credit_calc.ui
+        credit_calc.cpp
+        credit_calc.h
+        deposit_calc.h
+        deposit_calc.cpp
+        deposit_calc.ui
+        plot.h
+        plot.cpp
+        plot.ui
         ${TS_FILES}
 )
 

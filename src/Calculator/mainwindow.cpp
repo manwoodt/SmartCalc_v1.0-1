@@ -6,6 +6,15 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QDoubleValidator double_validator;
+    ui->insert_x->setValidator(&double_validator);
+
+    plot_Window = new plot();
+    connect(plot_Window, &plot::firstWindow, this, &MainWindow::show);
+    credit_Window = new Credit_calc();
+    connect(credit_Window, &Credit_calc::firstWindow, this, &MainWindow::show);
+    deposit_Window = new Deposit_calc();
+    connect(deposit_Window, &Deposit_calc::firstWindow, this, &MainWindow::show);
 
     connect(ui->pushButton_0, SIGNAL(clicked()), this,SLOT(digits_numbers()));
     connect(ui->pushButton_1, SIGNAL(clicked()), this,SLOT(digits_numbers()));
@@ -44,7 +53,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
 
     connect(ui->pushButton_equal, SIGNAL(clicked()), this,SLOT(equal()));
-    //connect(ui->insert_x, SIGNAL(returnPressed()), this, SLOT(equal()));
+    connect(ui->pushButton_graph, SIGNAL(clicked()), this,SLOT(plot_window()));
+    connect(ui->pushButton_credit, SIGNAL(clicked()), this,SLOT(credit_window()));
+    connect(ui->pushButton_deposit, SIGNAL(clicked()), this,SLOT(deposit_window()));
 }
 
 MainWindow::~MainWindow()
@@ -71,20 +82,23 @@ MainWindow::~MainWindow()
 
   void MainWindow::equal(){
 // попытки валидатора
-      QDoubleValidator double_validator;
-      ui->insert_x->setValidator(&double_validator);
+
       int is_there_x =0;
+      int good_exp_with_x = 1;
       QByteArray expression = ui->result->text().toLocal8Bit();
       QByteArray x_value = ui->insert_x->text().toLocal8Bit();
+              char *input_x = x_value.data();
       if (!x_value.isEmpty()){
         is_there_x =1;
+        good_exp_with_x=is_good_expression(input_x);
        }
       char *input_expr = expression.data();
       char changed_input_expr [255]{0};
-      char *input_x = x_value.data();
+
       int x_for_graph = 0;
       int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x);
       double res_num = 0;
+
 
       if (is_correct){
          res_num = parser(changed_input_expr);
@@ -121,4 +135,20 @@ MainWindow::~MainWindow()
     }
 }
 
+  void MainWindow::plot_window()
+  {
+    plot_Window->show();
+    this->close();
+  }
 
+  void MainWindow::credit_window()
+  {
+    credit_Window->show();
+    this->close();
+  }
+
+  void MainWindow::deposit_window()
+  {
+    deposit_Window->show();
+    this->close();
+  }
