@@ -16,7 +16,7 @@ void calculateDifferentiated(double loanAmount, int term, char month_or_year,
                              double interestRate, double* monthlyPayment,
                              double* totalPayment, double* overpayment);
 
-// Вход: общая сумма кредита, срок, процентная ставка, тип (аннуитетный,
+// Вход: общая сумма кредита, срок, процентная ставкаgit , тип (аннуитетный,
 // дифференцированный) rate -%, loan - кредит, term - срок (в годах)
 // Выход: ежемесячный платеж, переплата по кредиту, общая выплата
 

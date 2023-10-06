@@ -4,8 +4,93 @@
 <context>
     <name>Credit_calc</name>
     <message>
-        <location filename="credit_calc.ui" line="14"/>
+        <location filename="credit_calc.ui" line="19"/>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="296"/>
+        <source>Аннуитетные</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="291"/>
+        <source>Дифференцированные</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="274"/>
+        <source>Тип ежемесячных платежей</source>
+        <oldsource>Тип ежемесячных платежей :</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="44"/>
+        <source>Кредитный калькулятор</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="389"/>
+        <source>Сумма кредита, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="373"/>
+        <source>Срок кредита :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="450"/>
+        <source>Процентная ставка, % :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="406"/>
+        <source>лет/год</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="411"/>
+        <source>месяцев</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="357"/>
+        <location filename="credit_calc.ui" line="434"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="183"/>
+        <location filename="credit_calc.ui" line="204"/>
+        <location filename="credit_calc.ui" line="242"/>
+        <location filename="credit_calc.ui" line="335"/>
+        <source>0.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="220"/>
+        <source>Ежемесячный платеж, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="161"/>
+        <source>Переплата по кредиту, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="145"/>
+        <source>Общая выплата, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="113"/>
+        <source>Назад</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="credit_calc.ui" line="86"/>
+        <source>Рассчитать</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
