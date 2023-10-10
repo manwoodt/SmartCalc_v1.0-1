@@ -1,4 +1,26 @@
-#include "../smart_calc.h"
+#include "calc.h"
+long double get_total_ac(long double *amount, double term,
+                         long double interest_rate, int mode,
+                         int capitalization, long double replenishment,
+                         long double withdrawal);
+
+long double get_tax_am(long double total, long double rate);
+long double get_total_am(long double amount, long double accrued,
+                         long double tax);
+
+// int main() {
+//   long double amount = 1000000;
+//   double accrued_interest, tax, res;
+
+//   //  calculateAnnuity(loanAmount, term, interestRate);
+
+//   accrued_interest = get_total_ac(&amount, 24, 5, 0, 1, 5000, 5000);
+
+//   printf("начисленные проценты: %.2f\n", accrued_interest);
+//   printf("сумма налога: %.2f\n", tax);
+//   printf("сумма на вкладе к концу срока: %.2f\n", res);
+//   return 0;
+// }
 
 /*
 Вход: сумма вклада, срок размещения, процентная ставка, налоговая ставка,
@@ -18,16 +40,17 @@ long double get_total_ac(long double *amount, double term,
                          long double withdrawal) {
   long double res = 0;
   mode = (mode == 0) ? 12 : 1;
+  interest_rate /= 100;
+  // пополнения
   replenishment *= mode;
+  // снятия
   withdrawal *= mode;
-  for (int i = 0; (double)i < term; i++) {
+  for (int i = 0; i < term; i++) {
     long double tmp = 0;
     if (mode == 12) {
-      tmp = *amount * interest_rate / 100 / mode;
-    } else if (mode == 1) {
-      if (i % 11 == 0 && i != 0) {
-        tmp = *amount * interest_rate / 100;
-      }
+      tmp = *amount * interest_rate / mode;
+    } else {
+      tmp = *amount * interest_rate;
     }
     *amount += replenishment;
     *amount -= withdrawal;
