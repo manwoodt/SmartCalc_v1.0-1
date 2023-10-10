@@ -37,12 +37,14 @@ long double get_total_ac(long double *amount, double term,
   replenishment *= mode;
   // снятия
   withdrawal *= mode;
-  for (int i = 0; i < term; i++) {
+  for (int i = 0; (double)i < term; i++) {
     long double tmp = 0;
     if (mode == 12) {
       tmp = *amount * interest_rate / mode;
     } else {
-      tmp = *amount * interest_rate;
+      if (i % 11 == 0 && i != 0) {
+        tmp = *amount * interest_rate / 100;
+      }
     }
     *amount += replenishment;
     *amount -= withdrawal;

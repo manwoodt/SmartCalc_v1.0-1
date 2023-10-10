@@ -26,7 +26,7 @@ void Deposit_calc::delete_all_text(){
 void Deposit_calc::equal() {
     long double amount = ui->lineEdit_loanAmount->text().toDouble();
     double term = ui->lineEdit_term->text().toDouble();
-    if (ui->yearOrMonth->currentIndex() == 1) {
+    if (ui->yearOrMonth->currentIndex() == 0) {
       term = term /12;
     }
     long double interest_rate = ui->lineEdit_interestRate->text().toDouble();
@@ -42,7 +42,7 @@ void Deposit_calc::equal() {
     QString accrued_interest_str = QString::number(accrued_interest, 'g', 15);
     ui->lineEdit_accruedInterest->setText(accrued_interest_str);
     long double tax_amount = get_tax_am(accrued_interest, tax_rate);
-    QString tax_amount_str = QString::number(accrued_interest, 'g', 15);
+    QString tax_amount_str = QString::number(tax_amount, 'g', 15);
     ui->lineEdit_tax->setText(tax_amount_str);
     long double total_amount = get_total_am(amount, accrued_interest, tax_amount);
     QString total_amount_str = QString::number(total_amount, 'g', 15);
