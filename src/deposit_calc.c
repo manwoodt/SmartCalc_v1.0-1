@@ -1,12 +1,4 @@
 #include "calc.h"
-long double get_total_ac(long double *amount, double term,
-                         long double interest_rate, int mode,
-                         int capitalization, long double replenishment,
-                         long double withdrawal);
-
-long double get_tax_am(long double total, long double rate);
-long double get_total_am(long double amount, long double accrued,
-                         long double tax);
 
 // int main() {
 //   long double amount = 1000000;

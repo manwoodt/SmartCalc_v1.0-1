@@ -27,6 +27,8 @@ set(PROJECT_SOURCES
         ../parser.c
         ../validator.c
         ../stack.c
+        ../deposit_calc.c
+        ../credit_calc.c
         ../calc.h
         credit_calc.ui
         credit_calc.cpp

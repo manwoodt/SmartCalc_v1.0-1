@@ -46,16 +46,16 @@ void calculateDifferentiated(double loanAmount, int term, char month_or_year,
   }
 }
 
-int main() {
-  double overpayment, totalPayment, monthlyPayment;
+// int main() {
+//   double overpayment, totalPayment, monthlyPayment;
 
-  //  calculateAnnuity(loanAmount, term, interestRate);
+//   //  calculateAnnuity(loanAmount, term, interestRate);
 
-  calculateAnnuity(1000000, 1, 'm', 20, &monthlyPayment, &totalPayment,
-                   &overpayment);
+//   calculateAnnuity(1000000, 1, 'm', 20, &monthlyPayment, &totalPayment,
+//                    &overpayment);
 
-  printf("Ежемесячный платеж: %.2f\n", monthlyPayment);
-  printf("Переплата по кредиту: %.2f\n", overpayment);
-  printf("Общая выплата: %.2f\n", totalPayment);
-  return 0;
-}
+//   printf("Ежемесячный платеж: %.2f\n", monthlyPayment);
+//   printf("Переплата по кредиту: %.2f\n", overpayment);
+//   printf("Общая выплата: %.2f\n", totalPayment);
+//   return 0;
+// }

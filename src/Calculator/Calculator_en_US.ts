@@ -103,15 +103,18 @@
     </message>
     <message>
         <location filename="deposit_calc.ui" line="53"/>
-        <location filename="deposit_calc.ui" line="238"/>
-        <location filename="deposit_calc.ui" line="259"/>
-        <location filename="deposit_calc.ui" line="297"/>
+        <location filename="deposit_calc.ui" line="276"/>
+        <location filename="deposit_calc.ui" line="300"/>
+        <location filename="deposit_calc.ui" line="341"/>
+        <location filename="deposit_calc.ui" line="621"/>
+        <location filename="deposit_calc.ui" line="643"/>
         <source>0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="deposit_calc.ui" line="75"/>
         <location filename="deposit_calc.ui" line="152"/>
+        <location filename="deposit_calc.ui" line="190"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -141,37 +144,78 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="200"/>
+        <location filename="deposit_calc.ui" line="206"/>
+        <source>Налоговая ставка, % :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="238"/>
         <source>Сумма на вкладе в конце, руб. :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="216"/>
+        <location filename="deposit_calc.ui" line="254"/>
         <source>Сумма налога, руб. :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="275"/>
+        <location filename="deposit_calc.ui" line="319"/>
         <source>Начисленные проценты, % :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="329"/>
+        <location filename="deposit_calc.ui" line="376"/>
         <source>Капитализация</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="372"/>
-        <source>Рассчитать</source>
+        <location filename="deposit_calc.ui" line="440"/>
+        <source>ежемесячно</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="deposit_calc.ui" line="399"/>
-        <source>Назад</source>
+        <location filename="deposit_calc.ui" line="445"/>
+        <source>ежегодно</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="544"/>
+        <source>Очистить</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="599"/>
+        <source>Список пополнений, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="659"/>
+        <source>Список снятий, руб. :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="407"/>
+        <source>Периодичность</source>
+        <oldsource>периодичность</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="deposit_calc.ui" line="423"/>
+        <source>выплат</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="490"/>
+        <source>Рассчитать</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="517"/>
+        <source>Назад</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deposit_calc.ui" line="568"/>
         <source>Депозитный калькулятор</source>
         <translation type="unfinished"></translation>
     </message>

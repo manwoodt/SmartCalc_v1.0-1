@@ -62,4 +62,13 @@ void calculation_basic_operation(create_stack *output_str,
 void calculation_math_func_operation(create_stack *output_str,
                                      create_stack *stack_res, unsigned int i,
                                      double num1);
+
+// deposit
+long double get_total_ac(long double *amount, double term,
+                         long double interest_rate, int mode,
+                         int capitalization, long double replenishment,
+                         long double withdrawal);
+long double get_tax_am(long double total, long double rate);
+long double get_total_am(long double amount, long double accrued,
+                         long double tax);
 #endif /*S21_STRING_H*/

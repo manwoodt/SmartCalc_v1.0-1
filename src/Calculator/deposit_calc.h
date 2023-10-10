@@ -24,6 +24,10 @@ signals:
 
 private:
     Ui::Deposit_calc *ui;
+private slots:
+ void back();
+ void equal();
+ void delete_all_text();
 };
 
 #endif // DEPOSIT_CALC_H
