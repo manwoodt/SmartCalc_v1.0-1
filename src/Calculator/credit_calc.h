@@ -27,7 +27,7 @@ private:
 
 private slots:
  void back();
-// void equal();
+ void equal();
 };
 
 #endif // CREDIT_CALC_H

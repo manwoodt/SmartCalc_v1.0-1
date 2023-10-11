@@ -62,6 +62,13 @@ void calculation_basic_operation(create_stack *output_str,
 void calculation_math_func_operation(create_stack *output_str,
                                      create_stack *stack_res, unsigned int i,
                                      double num1);
+// credit
+int calculateAnnuity(double loanAmount, int term, double interestRate,
+                     double *monthlyPayment, double *totalPayment,
+                     double *overpayment);
+int calculateDifferentiated(double loanAmount, int term, double interestRate,
+                            double *monthlyPayment, double *totalPayment,
+                            double *overpayment);
 
 // deposit
 double get_total_ac(double *amount, double term, double interest_rate, int mode,

@@ -59,7 +59,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="pushButton_calc">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -274,7 +274,7 @@ QPushButton:pressed {
      <string>Тип ежемесячных платежей</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="comboBox_diff_or_ann">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -389,7 +389,7 @@ QPushButton:pressed {
      <string>Сумма кредита, руб. :</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="comboBox_year_or_month">
     <property name="geometry">
      <rect>
       <x>230</x>

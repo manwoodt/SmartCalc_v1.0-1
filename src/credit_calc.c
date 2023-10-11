@@ -9,33 +9,27 @@
 // частичных снятий Выход: начисленные проценты, сумма налога, сумма на вкладе к
 // концу срока
 
-void calculateAnnuity(double loanAmount, int term, char month_or_year,
-                      double interestRate, double* monthlyPayment,
-                      double* totalPayment, double* overpayment);
-void calculateDifferentiated(double loanAmount, int term, char month_or_year,
-                             double interestRate, double* monthlyPayment,
-                             double* totalPayment, double* overpayment);
-
 // Вход: общая сумма кредита, срок, процентная ставкаgit , тип (аннуитетный,
 // дифференцированный) rate -%, loan - кредит, term - срок (в годах)
 // Выход: ежемесячный платеж, переплата по кредиту, общая выплата
 
-void calculateAnnuity(double loanAmount, int term, char month_or_year,
-                      double interestRate, double* monthlyPayment,
-                      double* totalPayment, double* overpayment) {
+int calculateAnnuity(double loanAmount, int term, double interestRate,
+                     double* monthlyPayment, double* totalPayment,
+                     double* overpayment) {
+  if (loanAmount < 0.01 || term < 0.01 || interestRate < 0.01) return -1;
   double monthlyInterestRate = interestRate / 100 / 12;
-  if (month_or_year == 'y') term *= 12;
   *monthlyPayment = loanAmount *
                     (monthlyInterestRate * pow(1 + monthlyInterestRate, term)) /
                     (pow(1 + monthlyInterestRate, term) - 1);
   *totalPayment = *monthlyPayment * term;
   *overpayment = *totalPayment - loanAmount;
+  return 0;
 }
 
-void calculateDifferentiated(double loanAmount, int term, char month_or_year,
-                             double interestRate, double* monthlyPayment,
-                             double* totalPayment, double* overpayment) {
-  if (month_or_year == 'y') term *= 12;
+int calculateDifferentiated(double loanAmount, int term, double interestRate,
+                            double* monthlyPayment, double* totalPayment,
+                            double* overpayment) {
+  if (loanAmount < 0.01 || term < 0.01 || interestRate < 0.01) return -1;
   double monthlyInterestRate = interestRate / 100 / 12;
   double loanBalance = 0;
   for (int i = 1; i <= term; i++) {
@@ -44,6 +38,7 @@ void calculateDifferentiated(double loanAmount, int term, char month_or_year,
     *totalPayment += *monthlyPayment;
     *overpayment += *monthlyPayment - loanAmount / term;
   }
+  return 0;
 }
 
 // int main() {
