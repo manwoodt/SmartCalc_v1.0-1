@@ -160,7 +160,8 @@
     </message>
     <message>
         <location filename="deposit_calc.ui" line="319"/>
-        <source>Начисленные проценты, % :</source>
+        <source>Начисленные проценты, руб.  :</source>
+        <oldsource>Начисленные проценты, % :</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

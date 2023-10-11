@@ -20,32 +20,40 @@ void Deposit_calc::back() {
 }
 
 void Deposit_calc::delete_all_text(){
-  ui->lineEdit_accruedInterest->clear();
+    ui->lineEdit_accruedInterest->clear();
+    ui->lineEdit_interestRate->clear();
+    ui->lineEdit_taxRate->clear();
+    ui->lineEdit_loanAmount->clear();
+    ui->lineEdit_replenishment->clear();
+    ui->lineEdit_term->clear();
+    ui->lineEdit_withdrawal->clear();
+    ui->lineEdit_tax->clear();
+    ui->lineEdit_totalAmount->clear();
 }
 
 void Deposit_calc::equal() {
-    long double amount = ui->lineEdit_loanAmount->text().toDouble();
+    double amount = ui->lineEdit_loanAmount->text().toDouble();
     double term = ui->lineEdit_term->text().toDouble();
     if (ui->yearOrMonth->currentIndex() == 0) {
-      term = term /12;
+      term = term *12;
     }
-    long double interest_rate = ui->lineEdit_interestRate->text().toDouble();
-    long double tax_rate = ui->lineEdit_taxRate->text().toDouble();
+    double interest_rate = ui->lineEdit_interestRate->text().toDouble();
+    double tax_rate = ui->lineEdit_taxRate->text().toDouble();
     int mode = ui->periodOfPay->currentIndex();
     bool capitalization = ui->Capitalization->isChecked();
-    long double monthly_replenishment = ui->lineEdit_replenishment->text().toDouble();
-    long double monthly_withdrawal = ui->lineEdit_withdrawal->text().toDouble();
-    long double accrued_interest =
+    double monthly_replenishment = ui->lineEdit_replenishment->text().toDouble();
+    double monthly_withdrawal = ui->lineEdit_withdrawal->text().toDouble();
+    double accrued_interest =
         get_total_ac(&amount, term, interest_rate, mode, (int)capitalization,
                      monthly_replenishment, monthly_withdrawal);
 
-    QString accrued_interest_str = QString::number(accrued_interest, 'g', 15);
+    QString accrued_interest_str = QString::number(round(accrued_interest), 'g', 15);
     ui->lineEdit_accruedInterest->setText(accrued_interest_str);
-    long double tax_amount = get_tax_am(accrued_interest, tax_rate);
-    QString tax_amount_str = QString::number(tax_amount, 'g', 15);
+    double tax_amount = get_tax_am(accrued_interest, tax_rate);
+    QString tax_amount_str = QString::number(round(tax_amount), 'g', 15);
     ui->lineEdit_tax->setText(tax_amount_str);
-    long double total_amount = get_total_am(amount, accrued_interest, tax_amount);
-    QString total_amount_str = QString::number(total_amount, 'g', 15);
+    double total_amount = get_total_am(amount, accrued_interest, tax_amount);
+    QString total_amount_str = QString::number(round(total_amount), 'g', 15);
     ui->lineEdit_totalAmount->setText(total_amount_str);
 }
 

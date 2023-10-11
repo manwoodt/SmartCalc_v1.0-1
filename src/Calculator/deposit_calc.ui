@@ -308,7 +308,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>181</width>
+      <width>201</width>
       <height>20</height>
      </rect>
     </property>
@@ -316,7 +316,7 @@
      <string notr="true">color: black;</string>
     </property>
     <property name="text">
-     <string>Начисленные проценты, % :</string>
+     <string>Начисленные проценты, руб.  :</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_accruedInterest">

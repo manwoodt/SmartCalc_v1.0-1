@@ -64,11 +64,9 @@ void calculation_math_func_operation(create_stack *output_str,
                                      double num1);
 
 // deposit
-long double get_total_ac(long double *amount, double term,
-                         long double interest_rate, int mode,
-                         int capitalization, long double replenishment,
-                         long double withdrawal);
-long double get_tax_am(long double total, long double rate);
-long double get_total_am(long double amount, long double accrued,
-                         long double tax);
+double get_total_ac(double *amount, double term, double interest_rate, int mode,
+                    int capitalization, double replenishment,
+                    double withdrawal);
+double get_tax_am(double total, double rate);
+double get_total_am(double amount, double accrued, double tax);
 #endif /*S21_STRING_H*/
