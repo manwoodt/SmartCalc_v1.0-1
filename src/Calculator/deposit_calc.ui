@@ -36,7 +36,7 @@
      <rect>
       <x>160</x>
       <y>10</y>
-      <width>81</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -47,10 +47,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_term">
@@ -58,7 +59,7 @@
      <rect>
       <x>160</x>
       <y>40</y>
-      <width>61</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -69,10 +70,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -135,7 +137,7 @@
      <rect>
       <x>160</x>
       <y>70</y>
-      <width>81</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -146,10 +148,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -173,7 +176,7 @@
      <rect>
       <x>160</x>
       <y>100</y>
-      <width>81</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -184,10 +187,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
@@ -270,10 +274,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -294,10 +299,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -335,10 +341,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -615,10 +622,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_withdrawal">
@@ -637,10 +645,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_14">

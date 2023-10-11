@@ -13,8 +13,10 @@ Output: accrued interest, tax amount, deposit amount by the end of the term
 */
 
 double get_total_ac(double *amount, double term, double interest_rate, int mode,
-                    int capitalization, double replenishment,
-                    double withdrawal) {
+                    int capitalization, double replenishment, double withdrawal,
+                    double tax_rate) {
+  if (*amount < 0.01 || term < 0.01 || interest_rate < 0.01 || tax_rate < 0.01)
+    return -1;
   double res = 0;
   mode = (mode == 0) ? 12 : 1;
   interest_rate /= 100;
@@ -41,7 +43,9 @@ double get_total_ac(double *amount, double term, double interest_rate, int mode,
   return res;
 }
 
-double get_tax_am(double total, double rate) { return total * rate / 100; }
+double get_tax_am(double total, double tax_rate) {
+  return total * tax_rate / 100;
+}
 
 double get_total_am(double amount, double accrued, double tax) {
   return amount + accrued - tax;
