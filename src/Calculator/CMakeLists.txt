@@ -13,6 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR}PrintSupport)
+
 
 set(TS_FILES Calculator_en_US.ts)
 
@@ -36,9 +38,9 @@ set(PROJECT_SOURCES
         deposit_calc.h
         deposit_calc.cpp
         deposit_calc.ui
-        plot.h
-        plot.cpp
-        plot.ui
+        qcustomplot.h
+        qcustomplot.cpp
+
         ${TS_FILES}
 )
 
@@ -69,7 +71,7 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(Calculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Calculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport)
 
 set_target_properties(Calculator PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

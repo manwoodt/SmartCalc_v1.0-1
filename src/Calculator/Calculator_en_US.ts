@@ -9,17 +9,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="296"/>
+        <location filename="credit_calc.ui" line="299"/>
         <source>Аннуитетные</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="291"/>
+        <location filename="credit_calc.ui" line="294"/>
         <source>Дифференцированные</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="274"/>
+        <location filename="credit_calc.ui" line="277"/>
         <source>Тип ежемесячных платежей</source>
         <oldsource>Тип ежемесячных платежей :</oldsource>
         <translation type="unfinished"></translation>
@@ -30,46 +30,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="389"/>
+        <location filename="credit_calc.ui" line="394"/>
         <source>Сумма кредита, руб. :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="373"/>
+        <location filename="credit_calc.ui" line="378"/>
         <source>Срок кредита :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="450"/>
+        <location filename="credit_calc.ui" line="456"/>
         <source>Процентная ставка, % :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="406"/>
+        <location filename="credit_calc.ui" line="411"/>
         <source>лет/год</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="411"/>
+        <location filename="credit_calc.ui" line="416"/>
         <source>месяцев</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="credit_calc.ui" line="357"/>
-        <location filename="credit_calc.ui" line="434"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="credit_calc.ui" line="183"/>
-        <location filename="credit_calc.ui" line="204"/>
-        <location filename="credit_calc.ui" line="242"/>
-        <location filename="credit_calc.ui" line="335"/>
-        <source>0.0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="credit_calc.ui" line="220"/>
+        <location filename="credit_calc.ui" line="222"/>
         <source>Ежемесячный платеж, руб. :</source>
         <translation type="unfinished"></translation>
     </message>
@@ -387,14 +373,6 @@
     <message>
         <location filename="mainwindow.ui" line="1159"/>
         <source>deposit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>plot</name>
-    <message>
-        <location filename="plot.ui" line="16"/>
-        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

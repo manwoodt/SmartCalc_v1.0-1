@@ -177,10 +177,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_totalPayment">
@@ -198,10 +199,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
@@ -236,10 +238,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
   </widget>
@@ -329,10 +332,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0.0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_term">
@@ -351,10 +355,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -428,10 +433,11 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: black;</string>
+     <string notr="true">color: black;
+background: rgb(167, 255, 129);</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">

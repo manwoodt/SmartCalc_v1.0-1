@@ -9,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     QDoubleValidator double_validator;
     ui->insert_x->setValidator(&double_validator);
 
-    plot_Window = new plot();
-    connect(plot_Window, &plot::firstWindow, this, &MainWindow::show);
     credit_Window = new Credit_calc();
     connect(credit_Window, &Credit_calc::firstWindow, this, &MainWindow::show);
     deposit_Window = new Deposit_calc();
@@ -53,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
 
     connect(ui->pushButton_equal, SIGNAL(clicked()), this,SLOT(equal()));
-    connect(ui->pushButton_graph, SIGNAL(clicked()), this,SLOT(plot_window()));
+    //connect(ui->pushButton_graph, SIGNAL(clicked()), this,SLOT(plot_window()));
     connect(ui->pushButton_credit, SIGNAL(clicked()), this,SLOT(credit_window()));
     connect(ui->pushButton_deposit, SIGNAL(clicked()), this,SLOT(deposit_window()));
 }
@@ -134,12 +132,6 @@ MainWindow::~MainWindow()
       ui->result->setText(text);
     }
 }
-
-  void MainWindow::plot_window()
-  {
-    plot_Window->show();
-    this->close();
-  }
 
   void MainWindow::credit_window()
   {
