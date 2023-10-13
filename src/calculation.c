@@ -13,9 +13,9 @@
 //   // strcpy(input_str, "(42*((43+3-4)/23))^2");
 //   //  strcpy(input_str, "(43+43-5)/9");
 //   printf("BEF: %s\n", input_str);
-//   if (validator(input_str, cor_input_str, 1, "1", 1)) {
+//   if (validator(input_str, cor_input_str, 1, 1)) {
 //     printf("AFT: %s\n", cor_input_str);
-//     double res = parser(cor_input_str);
+//     double res = parser(cor_input_str, "11");
 //     // printf("Output_str\n");
 //     // printStack(output_str);
 //     printf("res: %f\n", res);

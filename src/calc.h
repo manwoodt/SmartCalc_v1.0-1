@@ -30,24 +30,26 @@ double peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
-              char *ch_x_value, int is_x_correct);
+              int is_x_correct);
 int garbage_for_validator(int operation);
 
 int is_good_expression(char *expression);
 
 void number_w_dot(const char *input_str, char *num_in_arr, unsigned int i);
 int how_much_dots(char *input_str, unsigned int i);
+void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
+                   char *ch_x_value);
 
 int is_operation(int operation);
 int is_number(int operation);
 int is_trigonometry(int operation);
 
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
-                        unsigned int *j, char *ch_x_value);
+                        unsigned int *j);
 void unary(char *input_str, char znak, int *array, unsigned int i,
            int *correct);
 
-double parser(char *input_str);
+double parser(char *input_str, char *x_value);
 void parser_operand(const char *input_str, create_stack *output_str,
                     unsigned int *i);
 void parser_operation(char *input_str, create_stack *stack,

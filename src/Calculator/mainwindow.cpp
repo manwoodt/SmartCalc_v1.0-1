@@ -94,12 +94,12 @@ MainWindow::~MainWindow()
       char changed_input_expr [255]{0};
 
       int x_for_graph = 0;
-      int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x, good_exp_with_x);
+      int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
       double res_num = 0;
 
 
       if (is_correct && good_exp_with_x){
-         res_num = parser(changed_input_expr);
+         res_num = parser(changed_input_expr,input_x);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);
        } else {
@@ -147,10 +147,11 @@ MainWindow::~MainWindow()
   }
 
   void MainWindow::draw_graph(){
+
       double x_min = ui->doubleSpinBox_x_min->text().toDouble();
       double x_max = ui->doubleSpinBox_x_max->text().toDouble();
       double y_min = ui->doubleSpinBox_y_min->text().toDouble();
-      double y_max = ui->doubleSpinBox_y_min->text().toDouble();
+      double y_max = ui->doubleSpinBox_y_max->text().toDouble();
       double step = ui->doubleSpinBox_step->text().toDouble();
       ui->widget->xAxis->setRange(x_min, x_max);
       ui->widget->yAxis->setRange(y_min, y_max);
@@ -169,12 +170,18 @@ MainWindow::~MainWindow()
       char changed_input_expr [255]{0};
 
       int x_for_graph = 0;
-      int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x, good_exp_with_x);
+      int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
       double res_num = 0;
 
+      char step_c[255] ;
+
+
       for (double current_x = x_min; current_x < x_max; current_x += step) {
-        double y_res = parser(changed_input_expr);
+          // перевод числа в строку
+        snprintf(step_c, sizeof step_c, "%f", step);
+        double y_res = parser(changed_input_expr, step_c);
         x.push_back(current_x);
         y.push_back(y_res);
       }
+//      free(step_c);
   }

@@ -1,13 +1,15 @@
 #include "calc.h"
 
-double parser(char *input_str) {
+double parser(char *input_str, char *x_value) {
   create_stack output_str = {0};
   create_stack stack = {0};
-  for (unsigned int i = 0; i < strlen(input_str); i++) {
-    if (input_str[i] == '(') {
-      push(&stack, input_str[i]);
+  char *cor_input_str_with_x = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  replacement_x(input_str, cor_input_str_with_x, x_value);
+  for (unsigned int i = 0; i < strlen(cor_input_str_with_x); i++) {
+    if (cor_input_str_with_x[i] == '(') {
+      push(&stack, cor_input_str_with_x[i]);
     }
-    if (input_str[i] == ')') {
+    if (cor_input_str_with_x[i] == ')') {
       while (peek(&stack) != '(') {
         output_str.operation[output_str.size] = pop(&stack);
         output_str.priority[output_str.size] = stack.priority[stack.size];
@@ -17,20 +19,24 @@ double parser(char *input_str) {
       nulldata(&stack);
     }
     // операнды
-    if (is_number(input_str[i])) {
-      parser_operand(input_str, &output_str, &i);
+    if (is_number(cor_input_str_with_x[i])) {
+      parser_operand(cor_input_str_with_x, &output_str, &i);
       // операции
-    } else if (is_operation(input_str[i])) {
-      parser_operation(input_str, &stack, &output_str, i);
+    } else if (is_operation(cor_input_str_with_x[i])) {
+      parser_operation(cor_input_str_with_x, &stack, &output_str, i);
     }
   }
-  // опустошение стека
+  // не убирается левая скобка
+  // когда число больше 9, в операции записывается ( вместо s
+  //  опустошение стека
+  // 115 при 1 цифре
   while (stack.size != 0) {
     output_str.operation[output_str.size] = pop(&stack);
     output_str.priority[output_str.size] = stack.priority[stack.size];
     output_str.char_or_not[output_str.size] = 1;
     output_str.size++;
   }
+  free(cor_input_str_with_x);
   return calculation(&output_str);
 }
 

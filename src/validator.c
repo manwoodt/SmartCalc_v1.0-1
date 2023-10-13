@@ -1,7 +1,7 @@
 #include "calc.h"
 
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
-              char *ch_x_value, int is_x_correct) {
+              int is_x_correct) {
   int correct = 1;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
@@ -37,10 +37,8 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
 
     // переименовать функции на мат. функции
     res = is_trigonometry(input_str[i]);
-    if (input_str[i] == 'x') res = 1;
     if (res) {
-      if (trigonometry_change(input_str, cor_input_str, &i, &j, ch_x_value))
-        correct = 0;
+      if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
     } else {
       if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
         i++;
@@ -68,6 +66,26 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
   return correct;
 }
 
+void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
+                   char *ch_x_value) {
+  int length = 0;
+  for (unsigned int i = 0, j = 0; i < strlen(cor_input_str); i++) {
+    if (cor_input_str[i] == 'x') {
+      strcat(cor_input_str_with_x, ch_x_value);
+      printf("STR:%s\n", cor_input_str);
+      length = strlen(ch_x_value);
+      j += length;
+    }
+    // else if (cor_input_str[i] == '(' || cor_input_str[i] == ')') {
+    //   i++;
+    // }
+    else {
+      cor_input_str_with_x[j] = cor_input_str[i];
+      j++;
+    }
+  }
+}
+
 void unary(char *input_str, char znak, int *array, unsigned int i,
            int *correct) {
   if (input_str[0] == znak) array[0] = 1;
@@ -91,9 +109,8 @@ int how_much_dots(char *input_str, unsigned int i) {
 // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q, acos - o, asin - i,
 // atan - a
 int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
-                        unsigned int *j, char *ch_x_value) {
+                        unsigned int *j) {
   // cos
-  int length = 0;
   if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
       input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'c';
@@ -134,12 +151,6 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
              input_str[*i + 4] == '(') {
     cor_input_str[*j] = 'q';
     *i += 3;
-  } else if (input_str[*i] == 'x') {
-    strcat(cor_input_str, ch_x_value);
-    printf("STR:%s\n", cor_input_str);
-    length = strlen(ch_x_value);
-    *j += length - 1;
-
   } else {
     return 1;
   }

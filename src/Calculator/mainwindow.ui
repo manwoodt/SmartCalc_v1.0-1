@@ -1261,6 +1261,9 @@ color: black;
      <property name="styleSheet">
       <string notr="true">color:black;</string>
      </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
     </widget>
     <widget class="QDoubleSpinBox" name="doubleSpinBox_y_min">
      <property name="geometry">
@@ -1286,6 +1289,9 @@ color: black;
      </property>
      <property name="styleSheet">
       <string notr="true">color:black;</string>
+     </property>
+     <property name="value">
+      <double>10.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
@@ -1384,6 +1390,9 @@ border-bottom-left-radius: 10px;
      <property name="styleSheet">
       <string notr="true">color:black;</string>
      </property>
+     <property name="value">
+      <double>0.000000000000000</double>
+     </property>
     </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
@@ -1424,6 +1433,9 @@ border-bottom-left-radius: 10px;
      </property>
      <property name="styleSheet">
       <string notr="true">color:black;</string>
+     </property>
+     <property name="value">
+      <double>10.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_3">
