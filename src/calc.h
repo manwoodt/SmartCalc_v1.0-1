@@ -30,7 +30,7 @@ double peek(const create_stack *stack);
 void nulldata(create_stack *stack);
 int priority(int operation);
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
-              char *ch_x_value);
+              char *ch_x_value, int is_x_correct);
 int garbage_for_validator(int operation);
 
 int is_good_expression(char *expression);

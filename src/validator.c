@@ -1,7 +1,7 @@
 #include "calc.h"
 
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
-              char *ch_x_value) {
+              char *ch_x_value, int is_x_correct) {
   int correct = 1;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
@@ -16,6 +16,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     if (garbage_for_validator(input_str[i])) {
       correct = 0;
     }
+    if (is_x_correct == 0) return 0;
     // 2 этап валидации (проверка на закрытие/открытие скобок)
     if ((input_str[i]) == '(') {
       is_left_bracket++;

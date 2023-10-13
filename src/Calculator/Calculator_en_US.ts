@@ -375,5 +375,30 @@
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="mainwindow.ui" line="1313"/>
+        <source>step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1341"/>
+        <source>y_min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1369"/>
+        <source>x_min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1410"/>
+        <source>y_max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1451"/>
+        <source>x_max</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

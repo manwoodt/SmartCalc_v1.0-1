@@ -24,8 +24,7 @@ int is_number(int operation) {
 
 int is_good_expression(char* expression) {
   for (unsigned int i = 0; i < strlen(expression); i++) {
-    if (expression[i] != '.' && expression[i] > '9' && expression[i] < '0')
-      return 0;
+    if (expression[i] != '.' && !is_number(expression[i])) return 0;
   }
   return 1;
 }

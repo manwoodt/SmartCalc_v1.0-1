@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_del, SIGNAL(clicked()), this,SLOT(backspace()));
 
     connect(ui->pushButton_equal, SIGNAL(clicked()), this,SLOT(equal()));
-    //connect(ui->pushButton_graph, SIGNAL(clicked()), this,SLOT(plot_window()));
+    connect(ui->pushButton_graph, SIGNAL(clicked()), this,SLOT(draw_graph()));
     connect(ui->pushButton_credit, SIGNAL(clicked()), this,SLOT(credit_window()));
     connect(ui->pushButton_deposit, SIGNAL(clicked()), this,SLOT(deposit_window()));
 }
@@ -85,7 +85,7 @@ MainWindow::~MainWindow()
       int good_exp_with_x = 1;
       QByteArray expression = ui->result->text().toLocal8Bit();
       QByteArray x_value = ui->insert_x->text().toLocal8Bit();
-              char *input_x = x_value.data();
+      char *input_x = x_value.data();
       if (!x_value.isEmpty()){
         is_there_x =1;
         good_exp_with_x=is_good_expression(input_x);
@@ -94,11 +94,11 @@ MainWindow::~MainWindow()
       char changed_input_expr [255]{0};
 
       int x_for_graph = 0;
-      int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x);
+      int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x, good_exp_with_x);
       double res_num = 0;
 
 
-      if (is_correct){
+      if (is_correct && good_exp_with_x){
          res_num = parser(changed_input_expr);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);
@@ -107,6 +107,7 @@ MainWindow::~MainWindow()
       }
     //  ui->insert_x->clear();
 }
+
 
 
   void MainWindow::backspace(){
@@ -143,4 +144,21 @@ MainWindow::~MainWindow()
   {
     deposit_Window->show();
     this->close();
+  }
+
+  void MainWindow::draw_graph(){
+      double x_min = ui->doubleSpinBox_x_min->text().toDouble();
+      double x_max = ui->doubleSpinBox_x_max->text().toDouble();
+      double y_min = ui->doubleSpinBox_y_min->text().toDouble();
+      double y_max = ui->doubleSpinBox_y_min->text().toDouble();
+      double step = ui->doubleSpinBox_step->text().toDouble();
+      ui->widget->xAxis->setRange(x_min, x_max);
+      ui->widget->yAxis->setRange(y_min, y_max);
+
+      for (double current_x = x_min; current_x < x_max; current_x += step) {
+      //  double tmp = calculateWithX(postfix, current_x);
+//        x.push_back(current_x);
+//        y.push_back(tmp);
+      }
+
   }

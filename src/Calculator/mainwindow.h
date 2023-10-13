@@ -39,6 +39,7 @@ private slots:
     void equal();
     void credit_window();
     void deposit_window();
+    void draw_graph();
 };
 
 #endif // MAINWINDOW_H
