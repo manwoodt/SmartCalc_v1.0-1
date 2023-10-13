@@ -4,7 +4,7 @@
 //   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
-//   strcpy(input_str, "6+x");
+//   strcpy(input_str, "sin(x)");
 //   // strcpy(input_str, "atan(0.5)");
 //   // strcpy(input_str, "sqrt(100)");
 //   //    strcpy(input_str, "sqrt(100)");
@@ -13,7 +13,7 @@
 //   // strcpy(input_str, "(42*((43+3-4)/23))^2");
 //   //  strcpy(input_str, "(43+43-5)/9");
 //   printf("BEF: %s\n", input_str);
-//   if (validator(input_str, cor_input_str, 1, "23.45")) {
+//   if (validator(input_str, cor_input_str, 1, "1", 1)) {
 //     printf("AFT: %s\n", cor_input_str);
 //     double res = parser(cor_input_str);
 //     // printf("Output_str\n");
@@ -24,12 +24,7 @@
 
 //   free(input_str);
 //   free(cor_input_str);
-//sWindow = new Plot();
-//connect(sWindow, &Plot::firstWindow, this, &MainWindow::show);
-//cWindow = new Credit();
-//connect(cWindow, &Credit::firstWindow, this, &MainWindow::show);
-//dWindow = new Deposit();
-//connect(dWindow, &Deposit::firstWindow, this, &MainWindow::show);
+
 //   return 0;
 // }
 

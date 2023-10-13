@@ -32,7 +32,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     // унарность
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
-    // x
+    // x дубляж с qt
     if ((input_str[i]) == 'x') is_there_x = 1;
 
     // переименовать функции на мат. функции
@@ -54,7 +54,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
       }
     }
     // точки
-    if (is_number(input_str[i])) {
+    if (is_number(input_str[i]) || is_there_x_value) {
       number_flag = 1;
       if (how_much_dots(input_str, i) > 1) correct = 0;
     }
@@ -138,8 +138,8 @@ int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
     strcat(cor_input_str, ch_x_value);
     printf("STR:%s\n", cor_input_str);
     length = strlen(ch_x_value);
-    *i += length;
-    *j += length;
+    *j += length - 1;
+
   } else {
     return 1;
   }

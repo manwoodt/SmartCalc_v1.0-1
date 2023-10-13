@@ -154,11 +154,27 @@ MainWindow::~MainWindow()
       double step = ui->doubleSpinBox_step->text().toDouble();
       ui->widget->xAxis->setRange(x_min, x_max);
       ui->widget->yAxis->setRange(y_min, y_max);
+      QVector<double> x, y;
+
+      int is_there_x =0;
+      int good_exp_with_x = 1;
+      QByteArray expression = ui->result->text().toLocal8Bit();
+      QByteArray x_value = ui->insert_x->text().toLocal8Bit();
+      char *input_x = x_value.data();
+      if (!x_value.isEmpty()){
+        is_there_x =1;
+        good_exp_with_x=is_good_expression(input_x);
+       }
+      char *input_expr = expression.data();
+      char changed_input_expr [255]{0};
+
+      int x_for_graph = 0;
+      int is_correct = validator(input_expr, changed_input_expr, is_there_x, input_x, good_exp_with_x);
+      double res_num = 0;
 
       for (double current_x = x_min; current_x < x_max; current_x += step) {
-      //  double tmp = calculateWithX(postfix, current_x);
-//        x.push_back(current_x);
-//        y.push_back(tmp);
+        double y_res = parser(changed_input_expr);
+        x.push_back(current_x);
+        y.push_back(y_res);
       }
-
   }
