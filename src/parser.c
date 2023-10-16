@@ -22,7 +22,8 @@ double parser(char *input_str, char *x_value) {
     if (is_number(cor_input_str_with_x[i])) {
       parser_operand(cor_input_str_with_x, &output_str, &i);
       // операции
-    } else if (is_operation(cor_input_str_with_x[i])) {
+    } else if (is_operation(cor_input_str_with_x[i]) ||
+               is_trigonometry(cor_input_str_with_x[i])) {
       parser_operation(cor_input_str_with_x, &stack, &output_str, i);
     }
   }

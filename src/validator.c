@@ -6,6 +6,8 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
   int is_left_bracket = 0;
   int is_right_bracket = 0;
   int number_flag = 0;
+  int operation_flag = 0;
+  int trig_flag = 0;
   int res = 0;
   int is_there_x = 0;
   int unar_minus[255] = {0};
@@ -14,7 +16,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
   // 1 - неверный ввод
   // 2 - ошибка со скобками
   // 3 - ошибка с вводом x
-  // 4 - отсутствует число/ значение x
+  // 4 - отсутствует число/значение x
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
@@ -44,6 +46,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     // переименовать функции на мат. функции
     res = is_trigonometry(input_str[i]);
     if (res) {
+      trig_flag++;
       // проверить
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 1;
     } else {
@@ -60,16 +63,19 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     }
     // точки
     if (is_number(input_str[i]) || is_there_x_value) {
-      number_flag = 1;
+      if (!is_number(input_str[i + 1])) number_flag++;
       if (how_much_dots(input_str, i) > 1) correct = 1;
     }
+    if (is_operation(input_str[i])) operation_flag++;
   }
+  // операции и операнды
+  if (operation_flag >= number_flag) correct = 1;
 
   if ((is_there_x && !is_there_x_value) || (is_there_x && !is_there_x_value))
     correct = 3;
   // неравное количество скобок
   if (is_left_bracket != is_right_bracket) correct = 1;
-  if (!number_flag) correct = 4;
+  if (number_flag == 0) correct = 4;
   return correct;
 }
 
@@ -95,7 +101,9 @@ void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
 void unary(char *input_str, char znak, int *array, unsigned int i,
            int *correct) {
   if (input_str[0] == znak) array[0] = 1;
-  if (is_operation(input_str[i]) && input_str[i + 1] == znak) array[i + 1] = 1;
+  if (is_operation(input_str[i] || is_trigonometry(input_str[i])) &&
+      input_str[i + 1] == znak)
+    array[i + 1] = 1;
   if (input_str[i] == '(' && input_str[i + 1] == znak) array[i + 1] = 1;
   if (input_str[i] == znak && input_str[i + 1] == '(') array[i] = 1;
   if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 1;

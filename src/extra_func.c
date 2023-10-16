@@ -3,7 +3,7 @@
 int is_operation(int operation) {
   if (operation == '+' || operation == '-' || operation == '~' ||
       operation == '*' || operation == '%' || operation == '/' ||
-      operation == '^' || is_trigonometry(operation))
+      operation == '^')
     return 1;
   else
     return 0;
