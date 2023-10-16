@@ -13,7 +13,7 @@ FLAGS = -lcheck
 
 #если ОС - Linux
 ifeq ($(UNAME), Linux)
-	FLAGS +=  -lm -lsubunit
+	FLAGS +=  -lm -lsubunit -lpthread
   	OPEN=xdg-open
 #если ОС - Darvin
 else
@@ -30,6 +30,7 @@ test: $(TESTS) $(S21LIB)
 	gcc  $^ -o test $(CFLAGS) $(CHECK) $(FLAGS)  
 	rm -rf *.o 
 	./test
+
 # $@ -  название цели 
 $(TESTS): $(TESTS:.o=.c)
 	gcc $(CFLAGS) -c $^  -o $@  $(CHECK)
@@ -61,7 +62,6 @@ cppcheck:
 rebuild: clean all
 #очищение предыдущих результатов тестов
 gcov_report: clean $(TESTS)
-#переделать
 	gcc -o test $(FLAGS) --coverage $(TESTS) $(SOURCES)
 	./test
 #Сбор информации о покрытии кода
