@@ -376,27 +376,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1319"/>
+        <location filename="mainwindow.ui" line="1340"/>
         <source>step</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1347"/>
+        <location filename="mainwindow.ui" line="1368"/>
         <source>y_min</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1375"/>
+        <location filename="mainwindow.ui" line="1396"/>
         <source>x_min</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1419"/>
+        <location filename="mainwindow.ui" line="1446"/>
         <source>y_max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1463"/>
+        <location filename="mainwindow.ui" line="1496"/>
         <source>x_max</source>
         <translation type="unfinished"></translation>
     </message>

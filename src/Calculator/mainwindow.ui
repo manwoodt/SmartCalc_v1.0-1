@@ -1230,7 +1230,7 @@ color: black;
       <x>390</x>
       <y>70</y>
       <width>431</width>
-      <height>171</height>
+      <height>301</height>
      </rect>
     </property>
    </widget>
@@ -1261,8 +1261,14 @@ color: black;
      <property name="styleSheet">
       <string notr="true">color:black;</string>
      </property>
+     <property name="maximum">
+      <double>10.990000000000000</double>
+     </property>
      <property name="singleStep">
       <double>0.100000000000000</double>
+     </property>
+     <property name="value">
+      <double>0.500000000000000</double>
      </property>
     </widget>
     <widget class="QDoubleSpinBox" name="doubleSpinBox_y_min">
@@ -1277,6 +1283,15 @@ color: black;
      <property name="styleSheet">
       <string notr="true">color:black;</string>
      </property>
+     <property name="minimum">
+      <double>-1000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000.990000000000009</double>
+     </property>
+     <property name="value">
+      <double>-5.000000000000000</double>
+     </property>
     </widget>
     <widget class="QDoubleSpinBox" name="doubleSpinBox_x_max">
      <property name="geometry">
@@ -1289,6 +1304,12 @@ color: black;
      </property>
      <property name="styleSheet">
       <string notr="true">color:black;</string>
+     </property>
+     <property name="minimum">
+      <double>-1000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000.990000000000009</double>
      </property>
      <property name="value">
       <double>10.000000000000000</double>
@@ -1390,8 +1411,14 @@ border-bottom-left-radius: 10px;
      <property name="styleSheet">
       <string notr="true">color:black;</string>
      </property>
+     <property name="minimum">
+      <double>-1000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000.000000000000000</double>
+     </property>
      <property name="value">
-      <double>0.000000000000000</double>
+      <double>-5.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -1433,6 +1460,12 @@ border-bottom-left-radius: 10px;
      </property>
      <property name="styleSheet">
       <string notr="true">color:black;</string>
+     </property>
+     <property name="minimum">
+      <double>-1000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000.990000000000009</double>
      </property>
      <property name="value">
       <double>10.000000000000000</double>

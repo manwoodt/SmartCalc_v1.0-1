@@ -4,7 +4,7 @@
 //   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
-//   strcpy(input_str, "sin(x)");
+//   strcpy(input_str, "sin(-2.000000)");
 //   // strcpy(input_str, "atan(0.5)");
 //   // strcpy(input_str, "sqrt(100)");
 //   //    strcpy(input_str, "sqrt(100)");

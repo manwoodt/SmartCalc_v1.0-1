@@ -69,17 +69,16 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
 void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
                    char *ch_x_value) {
   int length = 0;
+  for (unsigned int i = 0; i < strlen(ch_x_value); i++) {
+    if (ch_x_value[i] == '-') ch_x_value[i] = '~';
+  }
   for (unsigned int i = 0, j = 0; i < strlen(cor_input_str); i++) {
     if (cor_input_str[i] == 'x') {
       strcat(cor_input_str_with_x, ch_x_value);
       printf("STR:%s\n", cor_input_str);
       length = strlen(ch_x_value);
       j += length;
-    }
-    // else if (cor_input_str[i] == '(' || cor_input_str[i] == ')') {
-    //   i++;
-    // }
-    else {
+    } else {
       cor_input_str_with_x[j] = cor_input_str[i];
       j++;
     }

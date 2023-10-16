@@ -147,7 +147,7 @@ MainWindow::~MainWindow()
   }
 
   void MainWindow::draw_graph(){
-
+      ui->widget->clearGraphs();
       double x_min = ui->doubleSpinBox_x_min->text().toDouble();
       double x_max = ui->doubleSpinBox_x_max->text().toDouble();
       double y_min = ui->doubleSpinBox_y_min->text().toDouble();
@@ -173,15 +173,20 @@ MainWindow::~MainWindow()
       int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
       double res_num = 0;
 
-      char step_c[255] ;
+      char current_x_c[255] ;
 
 
       for (double current_x = x_min; current_x < x_max; current_x += step) {
           // перевод числа в строку
-        snprintf(step_c, sizeof step_c, "%f", step);
-        double y_res = parser(changed_input_expr, step_c);
+        snprintf(current_x_c, sizeof current_x_c, "%f", current_x);
+        double y_res = parser(changed_input_expr, current_x_c);
         x.push_back(current_x);
         y.push_back(y_res);
       }
-//      free(step_c);
+
+      ui->widget->addGraph();
+      ui->widget->graph(0)->addData(x, y);
+      ui->widget->replot();
+      x.clear();
+      y.clear();
   }
