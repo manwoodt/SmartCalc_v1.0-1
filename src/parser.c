@@ -38,6 +38,24 @@ double parser(char *input_str, char *x_value) {
   return calculation(&output_str);
 }
 
+void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
+                   char *ch_x_value) {
+  for (unsigned int i = 0; i < strlen(ch_x_value); i++) {
+    if (ch_x_value[i] == '-') ch_x_value[i] = '~';
+  }
+  for (unsigned int i = 0, j = 0; i < strlen(cor_input_str); i++) {
+    if (cor_input_str[i] == 'x') {
+      strcat(cor_input_str_with_x, ch_x_value);
+      printf("STR:%s\n", cor_input_str);
+      int length = strlen(ch_x_value);
+      j += length;
+    } else {
+      cor_input_str_with_x[j] = cor_input_str[i];
+      j++;
+    }
+  }
+}
+
 void parser_operation(char *input_str, create_stack *stack,
                       create_stack *output_str, unsigned int i) {
   if (stack->size == 0) {

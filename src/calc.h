@@ -32,9 +32,9 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
 int garbage_for_validator(int operation);
 int trigonometry_change(const char *input_str, char *cor_input_str,
                         unsigned int *i, unsigned int *j);
-void unary(char *input_str, char znak, int *array, unsigned int i,
+void unary(const char *input_str, char znak, int *array, unsigned int i,
            int *correct);
-int how_much_dots(char *input_str, unsigned int i);
+int how_much_dots(const char *input_str, unsigned int i);
 void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
                    char *ch_x_value);
 

@@ -4,7 +4,7 @@
 //   char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
 //   // scanf("%s", input_str);
-//   strcpy(input_str, "sin(2)*9");
+//   strcpy(input_str, "log(10)");
 //   // strcpy(input_str, "atan(0.5)");
 //   // strcpy(input_str, "sqrt(100)");
 //   //    strcpy(input_str, "sqrt(100)");
@@ -13,14 +13,16 @@
 //   // strcpy(input_str, "(42*((43+3-4)/23))^2");
 //   //  strcpy(input_str, "(43+43-5)/9");
 //   printf("BEF: %s\n", input_str);
-//   if (validator(input_str, cor_input_str, 1, 1)) {
-//     printf("AFT: %s\n", cor_input_str);
-//     double res = parser(cor_input_str, "11");
-//     // printf("Output_str\n");
-//     // printStack(output_str);
-//     printf("res: %f\n", res);
-//   } else
-//     printf("ERROR\n");
+//   int resu = 0;
+//   resu = validator(input_str, cor_input_str, 0, 1);
+//   printf("RES: %d\n AFT: %s\n", resu, cor_input_str);
+//   double res = parser(cor_input_str, "0");
+//   // printf("Output_str\n");
+//   // printStack(output_str);
+//   printf("res: %f\n", res);
+
+//   // else
+//   //    printf("ERROR\n");
 
 //   free(input_str);
 //   free(cor_input_str);

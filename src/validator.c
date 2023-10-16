@@ -44,32 +44,14 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
     if (is_operation(cor_input_str[i])) operation_flag++;
     if (cor_input_str[i] == '~') operation_flag--;
   }
-  if (operation_flag == 0) return 5;
+  // if (operation_flag == 0) return 5;
   if (is_left_bracket != is_right_bracket) return 2;
   if (operation_flag >= number_flag) return 4;
   if (number_flag == 0) return 4;
   return correct;
 }
 
-void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
-                   char *ch_x_value) {
-  for (unsigned int i = 0; i < strlen(ch_x_value); i++) {
-    if (ch_x_value[i] == '-') ch_x_value[i] = '~';
-  }
-  for (unsigned int i = 0, j = 0; i < strlen(cor_input_str); i++) {
-    if (cor_input_str[i] == 'x') {
-      strcat(cor_input_str_with_x, ch_x_value);
-      printf("STR:%s\n", cor_input_str);
-      int length = strlen(ch_x_value);
-      j += length;
-    } else {
-      cor_input_str_with_x[j] = cor_input_str[i];
-      j++;
-    }
-  }
-}
-
-void unary(char *input_str, char znak, int *array, unsigned int i,
+void unary(const char *input_str, char znak, int *array, unsigned int i,
            int *correct) {
   if (input_str[0] == znak) array[0] = 1;
   if (is_operation(input_str[i] || is_trigonometry(input_str[i])) &&
@@ -80,7 +62,7 @@ void unary(char *input_str, char znak, int *array, unsigned int i,
   if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 1;
 }
 
-int how_much_dots(char *input_str, unsigned int i) {
+int how_much_dots(const char *input_str, unsigned int i) {
   int count_of_dots = 0;
   char *num_in_arr = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
   number_w_dot(input_str, num_in_arr, i);
