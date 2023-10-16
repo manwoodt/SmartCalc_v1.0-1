@@ -106,8 +106,20 @@ MainWindow::~MainWindow()
          res_num = parser(changed_input_expr,input_x);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);
-       } else {
-         ui->result->setText("error");
+       }       else
+      {
+        QString err_str = "";
+        if (is_correct == 1)
+          err_str = "Ошибка: Неверный ввод";
+        else if (is_correct == 2)
+          err_str = "Ошибка: Ошибка со скобками";
+        else if (is_correct == 3)
+          err_str = "Ошибка: Ошибка с вводом х";
+        else if (is_correct == 4)
+          err_str = "Ошибка: Отсутствует число/значение x";
+
+        QMessageBox::warning(this, "error", err_str);
+        //clear();
       }
     //  ui->insert_x->clear();
 }

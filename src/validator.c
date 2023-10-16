@@ -5,27 +5,24 @@
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
               int is_x_correct) {
   int correct = 0, is_left_bracket = 0, is_right_bracket = 0, number_flag = 0,
-      operation_flag = 0, trig_flag = 0, res = 0, is_there_x = 0;
+      operation_flag = 0, res = 0;
   int unar_minus[255] = {0}, unar_plus[255] = {0};
 
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
-    // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) return 1;
-    // x
-    if (is_x_correct == 0) return 2;
-    // 2 этап валидации (проверка на закрытие/открытие скобок)
+
     if ((input_str[i]) == '(') is_left_bracket++;
     if ((input_str[i]) == ')') is_right_bracket++;
     if (input_str[i] == '(' && input_str[i + 1] == ')') return 2;
     if (is_right_bracket > is_left_bracket) return 2;
+
+    if (is_x_correct == 0) return 3;
 
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
     // переименовать функции на мат. функции
     res = is_trigonometry(input_str[i]);
     if (res) {
-      trig_flag++;
-      // проверить
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 1;
     } else {
       if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
@@ -39,19 +36,19 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
         j++;
       }
     }
-    // точки
     if (is_number(input_str[i]) || is_there_x_value) {
       if (!is_number(input_str[i + 1])) number_flag++;
-      if (how_much_dots(input_str, i) > 1) correct = 1;
+      // точки
+      if (how_much_dots(input_str, i) > 1) return 1;
     }
     if (is_operation(cor_input_str[i])) operation_flag++;
     if (cor_input_str[i] == '~') operation_flag--;
   }
   // операции и операнды
-  if (operation_flag >= number_flag) correct = 1;
+  if (operation_flag >= number_flag) return 4;
   // неравное количество скобок
-  if (is_left_bracket != is_right_bracket) correct = 1;
-  if (number_flag == 0) correct = 4;
+  if (is_left_bracket != is_right_bracket) return 2;
+  if (number_flag == 0) return 4;
   return correct;
 }
 
