@@ -80,7 +80,12 @@ MainWindow::~MainWindow()
 
   void MainWindow::equal(){
 // попытки валидатора
-
+//      if (ui->lineEdit_loanAmount->text().isEmpty() ||
+//          ui->lineEdit_term->text().isEmpty() ||
+//          ui->lineEdit_interestRate->text().isEmpty() ||
+//          ui->lineEdit_taxRate->text().isEmpty()) {
+//        QMessageBox::warning(this, "Error:", "Заполни поле со значением x");
+//      }
       int is_there_x =0;
       int good_exp_with_x = 1;
       QByteArray expression = ui->result->text().toLocal8Bit();
@@ -98,7 +103,7 @@ MainWindow::~MainWindow()
       double res_num = 0;
 
 
-      if (is_correct && good_exp_with_x){
+      if (is_correct == 0  && good_exp_with_x){
          res_num = parser(changed_input_expr,input_x);
          QString result_value = QString::number(res_num, 'g', 15);
          ui->result->setText(result_value);
@@ -112,7 +117,9 @@ MainWindow::~MainWindow()
 
   void MainWindow::backspace(){
     QString text = ui->result->text();
-    if (!text.isEmpty()) {
+    if (text == "error")
+       ui->result->setText("");
+    else if (!text.isEmpty()) {
       QString lastChar = text.right(4);
       if (lastChar == "asin" || lastChar == "acos" || lastChar == "atan" ||
           lastChar == "sqrt") {
@@ -132,6 +139,7 @@ MainWindow::~MainWindow()
       }
       ui->result->setText(text);
     }
+
 }
 
   void MainWindow::credit_window()
@@ -169,7 +177,6 @@ MainWindow::~MainWindow()
       char *input_expr = expression.data();
       char changed_input_expr [255]{0};
 
-      int x_for_graph = 0;
       int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
       double res_num = 0;
 

@@ -2,7 +2,7 @@
 
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
               int is_x_correct) {
-  int correct = 1;
+  int correct = 0;
   int is_left_bracket = 0;
   int is_right_bracket = 0;
   int number_flag = 0;
@@ -10,13 +10,19 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
   int is_there_x = 0;
   int unar_minus[255] = {0};
   int unar_plus[255] = {0};
-
+  // 0 - все ок
+  // 1 - неверный ввод
+  // 2 - ошибка со скобками
+  // 3 - ошибка с вводом x
+  // 4 - отсутствует число/ значение x
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     // 1 этап валидации (проверка на неправильные символы)
     if (garbage_for_validator(input_str[i])) {
-      correct = 0;
+      return 1;
     }
-    if (is_x_correct == 0) return 0;
+    // x
+    if (is_x_correct == 0) return 2;
+
     // 2 этап валидации (проверка на закрытие/открытие скобок)
     if ((input_str[i]) == '(') {
       is_left_bracket++;
@@ -25,20 +31,21 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
       is_right_bracket++;
     }
     // пустые скобки
-    if (input_str[i] == '(' && input_str[i + 1] == ')') correct = 0;
-    if (is_right_bracket > is_left_bracket) correct = 0;
-    if ((input_str[i]) == ' ') correct = 0;
+    if (input_str[i] == '(' && input_str[i + 1] == ')') return 3;
+    if (is_right_bracket > is_left_bracket) return 3;
 
     // унарность
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
-    // x дубляж с qt
-    if ((input_str[i]) == 'x') is_there_x = 1;
+
+    // // x дубляж с qt
+    // if ((input_str[i]) == 'x') is_there_x = 1;
 
     // переименовать функции на мат. функции
     res = is_trigonometry(input_str[i]);
     if (res) {
-      if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 0;
+      // проверить
+      if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 1;
     } else {
       if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
         i++;
@@ -54,15 +61,15 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     // точки
     if (is_number(input_str[i]) || is_there_x_value) {
       number_flag = 1;
-      if (how_much_dots(input_str, i) > 1) correct = 0;
+      if (how_much_dots(input_str, i) > 1) correct = 1;
     }
   }
 
   if ((is_there_x && !is_there_x_value) || (is_there_x && !is_there_x_value))
-    correct = 0;
+    correct = 3;
   // неравное количество скобок
-  if (is_left_bracket != is_right_bracket) correct = 0;
-  if (!number_flag) correct = 0;
+  if (is_left_bracket != is_right_bracket) correct = 1;
+  if (!number_flag) correct = 4;
   return correct;
 }
 
@@ -91,7 +98,7 @@ void unary(char *input_str, char znak, int *array, unsigned int i,
   if (is_operation(input_str[i]) && input_str[i + 1] == znak) array[i + 1] = 1;
   if (input_str[i] == '(' && input_str[i + 1] == znak) array[i + 1] = 1;
   if (input_str[i] == znak && input_str[i + 1] == '(') array[i] = 1;
-  if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 0;
+  if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 1;
 }
 
 int how_much_dots(char *input_str, unsigned int i) {
