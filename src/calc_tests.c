@@ -16,29 +16,38 @@ START_TEST(validator_test_1) {
 }
 END_TEST
 
-/*
 START_TEST(validator_test_2) {
-  int res = validator("5+5*5/5-sin(5)^ln(5)+log(10)-acos(3)-atan(7)+tan(3)",
-                      "4.7", 0);
-  ck_assert_int_eq(res, OK);
+  char *input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  char *cor_input_str = calloc(INPUT_STR_MAX_SIZE, sizeof(char));
+  int res1 = 0;
+
+  strcpy(input_str, "5+5*5/5-sin(5)^ln(5)+log(10)-acos(3)-atan(7)+tan(3)";
+  res1 = validator(input_str, cor_input_str, 0, 1);
+  if (res1 != 0) res1 = 1;
+  ck_assert_int_eq(res1, 1);
+  free(input_str);
+  free(cor_input_str);
+
+
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_3) {
   int res = validator("5+5*5/5-sin(5)^ln(5)*asin(34)", "fff", 0);
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_4) {
   int res = validator("5+5*5/5.3-sin(x)^ln(x)", "-49.8", 0);
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_5) {
   int res = validator("5+(5*5)/5-sin(x)^ln(x)", "bbb.", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
@@ -54,37 +63,37 @@ START_TEST(validator_test_6) {
       "098765432345678909876543234567898709876543234567890098765432345678909876"
       "5432345678987654345987654",
       0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_7) {
   int res = validator("p", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_8) {
   int res = validator("(1.5+3))", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_9) {
   int res = validator("406+x", "11.", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_10) {
   int res = validator("406)", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_11) {
   int res = validator("406--", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
@@ -102,7 +111,7 @@ START_TEST(validator_test_12) {
       "323456789873456789009876543234567890987654323456789873423456789034567890"
       "0987654323456789009876543234567890987654323456789873456",
       0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
@@ -117,76 +126,75 @@ START_TEST(validator_test_13) {
       "098765432345678909876543234567898709876543234567890098765432345678909876"
       "5432345678987654345987654",
       "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_14) {
   int res = validator("5)", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_15) {
   int res = validator("(", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_16) {
   int res = validator("ln(-log(-cos(-sin(-acos(-asin(2))))))", "", 0);
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_17) {
   int res = validator("asin(-sqrt(-tan(-ln(-atan(-asin(2))))))", "", 0);
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_18) {
   int res = validator("pow1a", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_19) {
   int res = validator("x221powe", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_20) {
   int res = validator("221mod(1+1)-221mod(sin(x*x+xmodx-x^x))", "", 0);
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
 START_TEST(validator_test_21) {
   int res = validate_x_y("-4");
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_22) {
   int res = validate_x_y("4");
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_23) {
   int res = validate_x_y("4.4");
-  ck_assert_int_eq(res, OK);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
 START_TEST(validator_test_24) {
   int res = validate_x_y("4.4.");
-  ck_assert_int_eq(res, ERR);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
-*/
 
 START_TEST(parser_calculator_test_1) {
   double res = parser("222+222", "0");
@@ -632,19 +640,19 @@ END_TEST
 
 // START_TEST(credit_calc_test_6) {
 //   int res = validate_it("14");
-//   ck_assert_int_eq(res, OK);
+//   ck_assert_int_eq(res, 0);
 // }
 // END_TEST
 
 // START_TEST(credit_calc_test_7) {
 //   int res = validate_it("14.");
-//   ck_assert_int_eq(res, ERR);
+//   ck_assert_int_eq(res, 1);
 // }
 // END_TEST
 
 // START_TEST(credit_calc_test_8) {
 //   int res = validate_it("a");
-//   ck_assert_int_eq(res, ERR);
+//   ck_assert_int_eq(res, 1);
 // }
 // END_TEST
 
