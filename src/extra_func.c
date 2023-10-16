@@ -37,15 +37,6 @@ int is_trigonometry(int operation) {
              : 0;
 }
 
-// int is_trigonometry(int operation) {
-//   return (operation == 'c' || operation == 'o' || operation == 's' ||
-//           operation == 'i' || operation == 'n' || operation == 't' ||
-//           operation == 'g' || operation == 'l' || operation == 'q' ||
-//           operation == 'r' || operation == 'a')
-//              ? 1
-//              : 0;
-// }
-
 int priority(int operation) {
   int priority = 0;
   switch (operation) {
@@ -80,7 +71,6 @@ int priority(int operation) {
     case '(':
       priority = 7;
       break;
-    // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q
     default:
       priority = 0;
       break;

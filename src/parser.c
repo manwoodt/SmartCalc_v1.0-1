@@ -27,10 +27,7 @@ double parser(char *input_str, char *x_value) {
       parser_operation(cor_input_str_with_x, &stack, &output_str, i);
     }
   }
-  // не убирается левая скобка
-  // когда число больше 9, в операции записывается ( вместо s
-  //  опустошение стека
-  // 115 при 1 цифре
+
   while (stack.size != 0) {
     output_str.operation[output_str.size] = pop(&stack);
     output_str.priority[output_str.size] = stack.priority[stack.size];

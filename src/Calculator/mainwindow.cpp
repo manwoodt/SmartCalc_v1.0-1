@@ -98,7 +98,6 @@ MainWindow::~MainWindow()
       char *input_expr = expression.data();
       char changed_input_expr [255]{0};
 
-      int x_for_graph = 0;
       int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
       double res_num = 0;
 
