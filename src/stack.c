@@ -60,13 +60,13 @@ void printStack(create_stack stack) {
 
 // second version
 
-void printStack(create_stack stack) {
-  printf("stack size: %ld\n", stack.size);
-  for (long unsigned int i = 0; i < stack.size; i++) {
-    if (stack.char_or_not[i])
-      printf("%c | ", stack.operation[i]);
-    else
-      printf("%f | ", stack.data[i]);
-  }
-  printf("\n\n");
-}
+// void printStack(create_stack stack) {
+//   printf("stack size: %ulu\n", stack.size);
+//   for (long unsigned int i = 0; i < stack.size; i++) {
+//     if (stack.char_or_not[i])
+//       printf("%c | ", stack.operation[i]);
+//     else
+//       printf("%f | ", stack.data[i]);
+//   }
+//   printf("\n\n");
+// }

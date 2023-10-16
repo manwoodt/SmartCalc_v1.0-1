@@ -2,10 +2,10 @@
 
 // 0 - все ок, 1 - неверный ввод, 2 - ошибка со скобками, 3 - ошибка с вводом x,
 // 4 - отсутствует число/значение x, 5 - отсутствует операция
-int validator(char *input_str, char *cor_input_str, int is_there_x_value,
+int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
               int is_x_correct) {
   int correct = 0, is_left_bracket = 0, is_right_bracket = 0, number_flag = 0,
-      operation_flag = 0, res = 0;
+      operation_flag = 0;
   int unar_minus[255] = {0}, unar_plus[255] = {0};
 
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
@@ -21,7 +21,7 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
     // переименовать функции на мат. функции
-    res = is_trigonometry(input_str[i]);
+    int res = is_trigonometry(input_str[i]);
     if (res) {
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 1;
     } else {
@@ -53,7 +53,6 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
 
 void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
                    char *ch_x_value) {
-  int length = 0;
   for (unsigned int i = 0; i < strlen(ch_x_value); i++) {
     if (ch_x_value[i] == '-') ch_x_value[i] = '~';
   }
@@ -61,7 +60,7 @@ void replacement_x(char *cor_input_str, char *cor_input_str_with_x,
     if (cor_input_str[i] == 'x') {
       strcat(cor_input_str_with_x, ch_x_value);
       printf("STR:%s\n", cor_input_str);
-      length = strlen(ch_x_value);
+      int length = strlen(ch_x_value);
       j += length;
     } else {
       cor_input_str_with_x[j] = cor_input_str[i];
@@ -94,8 +93,8 @@ int how_much_dots(char *input_str, unsigned int i) {
 
 // cos - c, sin - s, tan - t, log - l, ln - n, sqrt - q, acos - o, asin - i,
 // atan - a
-int trigonometry_change(char *input_str, char *cor_input_str, unsigned int *i,
-                        unsigned int *j) {
+int trigonometry_change(const char *input_str, char *cor_input_str,
+                        unsigned int *i, unsigned int *j) {
   if ((input_str[*i]) == 'c' && input_str[*i + 1] == 'o' &&
       input_str[*i + 2] == 's' && input_str[*i + 3] == '(') {
     cor_input_str[*j] = 'c';
