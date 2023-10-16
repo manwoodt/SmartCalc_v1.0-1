@@ -31,7 +31,8 @@ void Credit_calc::equal() {
   double monthlyPayment = 0, totalPayment = 0, overpayment = 0;
   int error = 0;
   if (ui->comboBox_diff_or_ann->currentIndex() == 0)
-    error = calculateDifferentiated(loanAmount, term, interest_rate,
+    error =
+        calculateDifferentiated(loanAmount, term, interest_rate,
                                 &monthlyPayment, &totalPayment, &overpayment);
   else
     error = calculateAnnuity(loanAmount, term, interest_rate, &monthlyPayment,
@@ -42,13 +43,16 @@ void Credit_calc::equal() {
     ui->lineEdit_totalPayment->setText("Error");
     ui->lineEdit_overpayment->setText("Error");
   } else {
-    QString monthlyPayment_str = QString::number(round(monthlyPayment*100)/100, 'g', 15);
+    QString monthlyPayment_str =
+        QString::number(round(monthlyPayment * 100) / 100, 'g', 15);
     ui->lineEdit_monthlyPayment->setText(monthlyPayment_str);
 
-    QString totalPayment_str = QString::number(round(totalPayment*100)/100, 'g', 15);
+    QString totalPayment_str =
+        QString::number(round(totalPayment * 100) / 100, 'g', 15);
     ui->lineEdit_totalPayment->setText(totalPayment_str);
 
-    QString overpayment_str = QString::number(round(overpayment*100)/100, 'g', 15);
+    QString overpayment_str =
+        QString::number(round(overpayment * 100) / 100, 'g', 15);
     ui->lineEdit_overpayment->setText(overpayment_str);
   }
 }

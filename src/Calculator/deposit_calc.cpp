@@ -56,13 +56,16 @@ void Deposit_calc::equal() {
     ui->lineEdit_tax->setText("Error");
     ui->lineEdit_totalAmount->setText("Error");
   } else {
-    QString accrued_interest_str = QString::number(round(accrued_interest*100)/100, 'g', 15);
+    QString accrued_interest_str =
+        QString::number(round(accrued_interest * 100) / 100, 'g', 15);
     ui->lineEdit_accruedInterest->setText(accrued_interest_str);
     double tax_amount = get_tax_am(accrued_interest, tax_rate);
-    QString tax_amount_str = QString::number(round(tax_amount*100)/100, 'g', 15);
+    QString tax_amount_str =
+        QString::number(round(tax_amount * 100) / 100, 'g', 15);
     ui->lineEdit_tax->setText(tax_amount_str);
     double total_amount = get_total_am(amount, accrued_interest, tax_amount);
-    QString total_amount_str = QString::number(round(total_amount*100)/100, 'g', 15);
+    QString total_amount_str =
+        QString::number(round(total_amount * 100) / 100, 'g', 15);
     ui->lineEdit_totalAmount->setText(total_amount_str);
   }
 }

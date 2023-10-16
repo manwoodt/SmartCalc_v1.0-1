@@ -1,7 +1,7 @@
 #include "calc.h"
 
 // 0 - все ок, 1 - неверный ввод, 2 - ошибка со скобками, 3 - ошибка с вводом x,
-// 4 - отсутствует число/значение x
+// 4 - отсутствует число/значение x, 5 - отсутствует операция
 int validator(char *input_str, char *cor_input_str, int is_there_x_value,
               int is_x_correct) {
   int correct = 0, is_left_bracket = 0, is_right_bracket = 0, number_flag = 0,
@@ -44,10 +44,9 @@ int validator(char *input_str, char *cor_input_str, int is_there_x_value,
     if (is_operation(cor_input_str[i])) operation_flag++;
     if (cor_input_str[i] == '~') operation_flag--;
   }
-  // операции и операнды
-  if (operation_flag >= number_flag) return 4;
-  // неравное количество скобок
+  if (operation_flag == 0) return 5;
   if (is_left_bracket != is_right_bracket) return 2;
+  if (operation_flag >= number_flag) return 4;
   if (number_flag == 0) return 4;
   return correct;
 }
