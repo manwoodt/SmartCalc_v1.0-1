@@ -172,7 +172,7 @@ void MainWindow::draw_graph() {
   char current_x_c[255];
 
  double y_res = 0;
-   if ((is_correct == 0 || is_correct == 4 || is_correct == 5) && good_exp_with_x) {
+   if ((is_correct == 0 || is_correct == 5) && good_exp_with_x) {
       for (double current_x = x_min; current_x < x_max; current_x += step) {
         // перевод числа в строку
         snprintf(current_x_c, sizeof current_x_c, "%f", current_x);
@@ -197,6 +197,8 @@ void MainWindow::draw_graph() {
          err_str = "Ошибка: Ошибка со скобками";
        else if (is_correct == 3)
          err_str = "Ошибка: Ошибка с вводом х";
+       else if (is_correct == 4)
+         err_str = "Ошибка: Отсутствует число/x";
 
        QMessageBox::warning(this, "error", err_str);
      }

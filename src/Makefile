@@ -23,6 +23,19 @@ endif
 
 all: test
 
+dvi:
+	open ../README.md
+
+install:
+	mkdir build
+	mkdir $(HOME)/Desktop/Calculator
+	cd build && cmake ../Calculator/CMakeLists.txt && make
+	cp -rf build/calculator.app $(HOME)/Desktop/Calculator/Calculator.app
+
+uninstall:
+	rm -rf $(HOME)/Desktop/Calculator/
+	rm -rf build
+
 # $^ -  всё что идет после цели 
 # $< - то что идет сразу после цели 
 test: $(TESTS) $(S21LIB)
@@ -45,7 +58,7 @@ $(S21LIB): $(OBJECTS)
 	gcc $(CFLAGS) -c $(SOURCES) 
 # Опция c заставляет создавать (от create) библиотеку, если ее нет,
 # а опция r (от replace) заменяет старые объектные файлы новыми версиями.
-	ar rc $@ $^
+	ar rcs $@ $^
 #Пока у нас есть лишь архивный файл libfs.a. 
 #Чтобы из него сделать полноценную библиотеку объектных файлов надо добавить к этому архиву
 # индекс символов, т.е. список вложенных в библиотеку функций и переменных, 
