@@ -1,13 +1,13 @@
 #include "calc.h"
 
 // 0 - все ок, 1 - неверный ввод, 2 - ошибка со скобками, 3 - ошибка с вводом x,
-// 4 - отсутствует число/значение x, 5 - отсутствует операция
+// 4 - отсутствует число/значение x, 5 - отсутствует x
 int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
               int is_x_correct) {
   int correct = 0, is_left_bracket = 0, is_right_bracket = 0, number_flag = 0,
       operation_flag = 0;
   int unar_minus[255] = {0}, unar_plus[255] = {0};
-
+  // if (is_there_x_value && !is_x_correct) return 5;
   for (unsigned int i = 0, j = 0; i < strlen(input_str); i++) {
     if (garbage_for_validator(input_str[i])) return 1;
 
@@ -16,7 +16,7 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
     if (input_str[i] == '(' && input_str[i + 1] == ')') return 2;
     if (is_right_bracket > is_left_bracket) return 2;
 
-    if (is_x_correct == 0) return 3;
+    if (is_there_x_value && is_x_correct == 0) correct = 3;
 
     unary(input_str, '+', unar_plus, i, &correct);
     unary(input_str, '-', unar_minus, i, &correct);
@@ -36,6 +36,7 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
         j++;
       }
     }
+    //  if (input_str[i] == 'x') x_flag++;
     if (is_number(input_str[i]) || is_there_x_value) {
       if (!is_number(input_str[i + 1])) number_flag++;
       // точки
@@ -44,10 +45,10 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
     if (is_operation(cor_input_str[i])) operation_flag++;
     if (cor_input_str[i] == '~') operation_flag--;
   }
-  // if (operation_flag == 0) return 5;
   if (is_left_bracket != is_right_bracket) return 2;
   if (operation_flag >= number_flag) return 4;
-  if (number_flag == 0) return 4;
+  if (number_flag == 0 && !is_there_x_value) return 4;
+  // if (number_flag == 0 && x_flag == 0) return 5;
   return correct;
 }
 

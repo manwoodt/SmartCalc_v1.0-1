@@ -74,12 +74,12 @@ void MainWindow::delete_all_text() {
 
 void MainWindow::equal() {
   int is_there_x = 0;
-  int good_exp_with_x = 1;
+  int good_exp_with_x = 0;
   QByteArray expression = ui->result->text().toLocal8Bit();
   QByteArray x_value = ui->insert_x->text().toLocal8Bit();
   char *input_x = x_value.data();
+  if (expression.contains('x')) is_there_x = 1;
   if (!x_value.isEmpty()) {
-    is_there_x = 1;
     good_exp_with_x = is_good_expression(input_x);
   }
   char *input_expr = expression.data();
@@ -89,7 +89,7 @@ void MainWindow::equal() {
       validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
   double res_num = 0;
 
-  if (is_correct == 0 && good_exp_with_x) {
+  if (is_correct == 0) {
     res_num = parser(changed_input_expr, input_x);
     QString result_value = QString::number(res_num, 'g', 15);
     ui->result->setText(result_value);
@@ -157,22 +157,22 @@ void MainWindow::draw_graph() {
   QVector<double> x, y;
 
   int is_there_x = 0;
-  int good_exp_with_x = 1;
+  int good_exp_with_x = 0;
   QByteArray expression = ui->result->text().toLocal8Bit();
   QByteArray x_value = ui->insert_x->text().toLocal8Bit();
   char *input_x = x_value.data();
    char *input_expr = expression.data();
-  if (!x_value.isEmpty()) {
-    is_there_x = 1;
-    good_exp_with_x = is_good_expression(input_x);
-  }
+   if (expression.contains('x')) is_there_x = 1;
+   if (!x_value.isEmpty()) {
+     good_exp_with_x = is_good_expression(input_x);
+   }
   char changed_input_expr[255]{0};
 
   int is_correct = validator(input_expr, changed_input_expr, is_there_x, good_exp_with_x);
   char current_x_c[255];
 
  double y_res = 0;
-   if ((is_correct == 0 || is_correct == 5) && good_exp_with_x) {
+   if (is_correct == 0 || is_correct == 3) {
       for (double current_x = x_min; current_x < x_max; current_x += step) {
         // перевод числа в строку
         snprintf(current_x_c, sizeof current_x_c, "%f", current_x);
@@ -195,8 +195,6 @@ void MainWindow::draw_graph() {
          err_str = "Ошибка: Неверный ввод";
        else if (is_correct == 2)
          err_str = "Ошибка: Ошибка со скобками";
-       else if (is_correct == 3)
-         err_str = "Ошибка: Ошибка с вводом х";
        else if (is_correct == 4)
          err_str = "Ошибка: Отсутствует число/x";
 
