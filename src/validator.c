@@ -25,8 +25,9 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
     if (res) {
       if (trigonometry_change(input_str, cor_input_str, &i, &j)) correct = 1;
     } else {
-      if ((unar_minus[i] && unar_minus[i + 1]) || unar_plus[i]) {
-        i++;
+      if (unar_plus[i]) i++;
+      if (unar_minus[i] && unar_minus[i + 1]) {
+        i += 2;
       }
       if (unar_minus[i]) {
         cor_input_str[j] = '~';
@@ -54,7 +55,14 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
 
 void unary(const char *input_str, char znak, int *array, unsigned int i,
            int *correct) {
-  if (input_str[0] == znak) array[0] = 1;
+  if (input_str[0] == znak) {
+    array[0] = 1;
+    int i = 1;
+    while (input_str[i] == znak && input_str[i - 1] == znak) {
+      array[i] = 1;
+      i++;
+    }
+  }
   if ((is_operation(input_str[i]) || is_trigonometry(input_str[i])) &&
       input_str[i + 1] == znak)
     array[i + 1] = 1;
