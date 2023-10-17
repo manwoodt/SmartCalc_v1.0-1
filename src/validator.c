@@ -54,12 +54,12 @@ int validator(const char *input_str, char *cor_input_str, int is_there_x_value,
 void unary(const char *input_str, char znak, int *array, unsigned int i,
            int *correct) {
   if (input_str[0] == znak) array[0] = 1;
-  if (is_operation(input_str[i] || is_trigonometry(input_str[i])) &&
+  if ((is_operation(input_str[i]) || is_trigonometry(input_str[i])) &&
       input_str[i + 1] == znak)
     array[i + 1] = 1;
   if (input_str[i] == '(' && input_str[i + 1] == znak) array[i + 1] = 1;
   if (input_str[i] == znak && input_str[i + 1] == '(') array[i] = 1;
-  if (input_str[i] == znak && is_trigonometry(input_str[i + 1])) *correct = 1;
+  if (input_str[0] == znak && is_trigonometry(input_str[i + 1])) *correct = 1;
 }
 
 int how_much_dots(const char *input_str, unsigned int i) {

@@ -1,19 +1,15 @@
 #include "calc.h"
-// положить число в стек
+
 void push(create_stack *stack, double value) {
   if (stack->size >= STACK_MAX_SIZE) {
     printf("STACK_OVERFLOW\n");
     exit(STACK_OVERFLOW);
   }
   stack->data[stack->size] = value;
-  // разобраться
-  // if (stack->char_or_not[stack->size]) {
   stack->priority[stack->size] = priority(value);
-  //}
   stack->size++;
 }
 
-// взять число из стека
 double pop(create_stack *stack) {
   if (stack->size == 0) {
     printf("STACK_UNDERFLOW pop\n");
@@ -23,7 +19,6 @@ double pop(create_stack *stack) {
   return stack->data[stack->size];
 }
 
-// посмотреть последнее число из стека
 double peek(const create_stack *stack) {
   if (stack->size == 0) {
     printf("STACK_UNDERFLOW peek");

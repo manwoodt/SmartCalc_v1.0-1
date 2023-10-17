@@ -12,22 +12,22 @@ list
 Output: accrued interest, tax amount, deposit amount by the end of the term
 */
 
-double get_total_ac(double *amount, double term, double interest_rate, int mode,
-                    int capitalization, double replenishment, double withdrawal,
-                    double tax_rate) {
+double get_total_ac(double *amount, double term, double interest_rate,
+                    int period_of_pay_y, int capitalization,
+                    double replenishment, double withdrawal, double tax_rate) {
   if (*amount < 0.01 || term < 0.01 || interest_rate < 0.01 || tax_rate < 0.01)
     return -1;
   double res = 0;
-  mode = (mode == 0) ? 12 : 1;
+  period_of_pay_y = (period_of_pay_y == 0) ? 12 : 1;
   interest_rate /= 100;
   // пополнения
-  replenishment *= mode;
+  replenishment *= period_of_pay_y;
   // снятия
-  withdrawal *= mode;
+  withdrawal *= period_of_pay_y;
   for (int i = 1; (double)i <= term; i++) {
     double tmp = 0;
-    if (mode == 12) {
-      tmp = *amount * interest_rate / mode;
+    if (period_of_pay_y == 12) {
+      tmp = *amount * interest_rate / period_of_pay_y;
     } else {
       if (i % 12 == 0) {
         tmp = *amount * interest_rate;

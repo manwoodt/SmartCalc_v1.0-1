@@ -68,9 +68,9 @@ int calculateDifferentiated(double loanAmount, int term, double interestRate,
                             double *overpayment);
 
 // deposit
-double get_total_ac(double *amount, double term, double interest_rate, int mode,
-                    int capitalization, double replenishment, double withdrawal,
-                    double tax_rate);
+double get_total_ac(double *amount, double term, double interest_rate,
+                    int period_of_pay_y, int capitalization,
+                    double replenishment, double withdrawal, double tax_rate);
 double get_tax_am(double total, double rate);
 double get_total_am(double amount, double accrued, double tax);
 #endif /*S21_STRING_H*/
